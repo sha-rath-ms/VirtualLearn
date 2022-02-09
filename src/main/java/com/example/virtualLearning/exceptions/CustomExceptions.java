@@ -6,6 +6,6 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class HandleAllExceptions extends RuntimeException {
+public class CustomExceptions extends RuntimeException {
     private ResultInfo resultInfo;
 }

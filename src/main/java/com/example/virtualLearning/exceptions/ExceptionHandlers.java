@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class ExceptionHandlers {
 
-    @ExceptionHandler(HandleAllExceptions.class)
+    @ExceptionHandler(CustomExceptions.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public ResponseWrapper handleInCorrectPinException(HandleAllExceptions handleAllExceptions) {
-        return new ResponseWrapper(handleAllExceptions.getResultInfo(), null);
+    public ResponseWrapper handleInCorrectPinException(CustomExceptions customExceptions) {
+        return new ResponseWrapper(customExceptions.getResultInfo(), null);
     }
 }

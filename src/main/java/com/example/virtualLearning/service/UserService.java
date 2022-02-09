@@ -1,7 +1,7 @@
 package com.example.virtualLearning.service;
 
 import com.example.virtualLearning.entity.Users;
-import com.example.virtualLearning.exceptions.HandleAllExceptions;
+import com.example.virtualLearning.exceptions.CustomExceptions;
 import com.example.virtualLearning.repository.UserRepository;
 import com.example.virtualLearning.response.ResultInfoConstants;
 import com.example.virtualLearning.validations.Validations;
@@ -24,7 +24,7 @@ public class UserService {
     public boolean insert(Users users) {
         if (userRepository.existsById(users.getMobileNumber())) {
             log.warn("User is already present with id:{}", users.getMobileNumber());
-            throw new HandleAllExceptions(ResultInfoConstants.DUPLICATE_USER);
+            throw new CustomExceptions(ResultInfoConstants.DUPLICATE_USER);
         }
         validations.validateMobileNumber(users.getMobileNumber());
         validations.validateEmail(users.getEmail());

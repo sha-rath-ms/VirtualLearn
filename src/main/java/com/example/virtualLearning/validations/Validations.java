@@ -1,6 +1,6 @@
 package com.example.virtualLearning.validations;
 
-import com.example.virtualLearning.exceptions.HandleAllExceptions;
+import com.example.virtualLearning.exceptions.CustomExceptions;
 import com.example.virtualLearning.response.ResultInfoConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -17,7 +17,7 @@ public class Validations {
         Matcher matcher = pattern.matcher(mobile);
         if (!matcher.matches()) {
             log.warn("User mobile number is not valid");
-            throw new HandleAllExceptions(ResultInfoConstants.MOBILE_NUMBER_VALIDATION);
+            throw new CustomExceptions(ResultInfoConstants.MOBILE_NUMBER_VALIDATION);
         }
     }
 
@@ -27,7 +27,7 @@ public class Validations {
         Matcher matcher=pattern.matcher(email);
         if(!matcher.matches()){
             log.warn("Email is invalid");
-            throw new HandleAllExceptions(ResultInfoConstants.EMAIL_VALIDATION);
+            throw new CustomExceptions(ResultInfoConstants.EMAIL_VALIDATION);
         }
     }
 }
