@@ -18,7 +18,7 @@ import javax.validation.Valid;
 public class UserController {
     private final UserService userService;
 
-    @PostMapping("/signup")
+    @PostMapping("/register")
     @ResponseStatus(HttpStatus.OK)
     public ResponseWrapper signUp(@RequestBody @Valid Users user) {
         return new ResponseWrapper(ResultInfoConstants.SUCCESS, userService.insert(user));
