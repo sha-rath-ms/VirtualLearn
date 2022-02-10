@@ -23,4 +23,5 @@ public class UserController {
     public ResponseWrapper signUp(@RequestBody @Valid Users user) {
         return new ResponseWrapper(ResultInfoConstants.SUCCESS, userService.insert(user));
     }
+    
 }

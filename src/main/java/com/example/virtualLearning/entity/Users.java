@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 @Data
 public class Users {
     @Id
-    private long mobileNumber;
+    private Long mobileNumber;
     @NotBlank
     private String fullName;
     @NotBlank
