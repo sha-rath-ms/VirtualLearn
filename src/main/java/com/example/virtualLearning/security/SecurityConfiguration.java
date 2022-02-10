@@ -33,7 +33,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(STATELESS);
         http
                 .authorizeRequests()
-                .antMatchers("/signup**", "/recoverPassword**", "/forgotPassword**", "/forgotPassword/**")
+                .antMatchers("/register**")
                 .anonymous();
         http.addFilter(new CustomAuthenticationFilter(authenticationManagerBean(), jwtTokenUtil));
         http.addFilterBefore(new CustomAuthorizationFilter(jwtTokenUtil, myUserDetailsService), UsernamePasswordAuthenticationFilter.class);
