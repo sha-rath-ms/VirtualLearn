@@ -2,6 +2,8 @@ package com.example.virtualLearning.entity;
 
 import com.example.virtualLearning.tables.ContentTable;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 
@@ -17,6 +19,7 @@ public class Content {
         this.id = id;
         this.contentUrl = contentUrl;
         this.completed = completed;
+
     }
 
     public ContentTable toContentTable(long chapterId)

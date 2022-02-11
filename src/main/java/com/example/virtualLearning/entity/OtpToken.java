@@ -24,10 +24,11 @@ import java.util.Random;
 public class OtpToken {
     @Id
     @Column(name = "mobile_number")
-    private String mobileNumber;
+    private Long mobileNumber;
     private int Otp;
+    private Boolean verification=false;
 
-    public OtpToken(String mobileNumber) {
+    public OtpToken(Long mobileNumber) {
         Random rd = new Random();
         this.mobileNumber = mobileNumber;
         this.Otp = 1000 + rd.nextInt(8999);

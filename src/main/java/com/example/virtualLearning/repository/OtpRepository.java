@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface OtpRepository extends JpaRepository<OtpToken, String> {
+public interface OtpRepository extends JpaRepository<OtpToken, Long> {
 
 }
