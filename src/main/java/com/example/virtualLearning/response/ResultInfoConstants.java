@@ -14,4 +14,5 @@ public class ResultInfoConstants {
     public static final ResultInfo OTP_SENT = new ResultInfo("OTP is sent to the mobile number");
     public static final ResultInfo OTP_NOT_VALIDATED = new ResultInfo("OTP was not verified before register");
     public static final ResultInfo OTP_VERIFIED = new ResultInfo("OTP was verified successfully");
+    public static final ResultInfo INVALID_ID = new ResultInfo("Invalid id");
 }

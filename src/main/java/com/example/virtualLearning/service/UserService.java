@@ -5,18 +5,15 @@ import com.example.virtualLearning.entity.Users;
 import com.example.virtualLearning.exceptions.CustomExceptions;
 import com.example.virtualLearning.repository.OtpRepository;
 import com.example.virtualLearning.repository.UserRepository;
-import com.example.virtualLearning.response.ResultInfo;
 import com.example.virtualLearning.response.ResultInfoConstants;
 import com.example.virtualLearning.tables.UserTable;
 import com.example.virtualLearning.validations.Validations;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.Pattern;
 import java.util.Optional;
 
 @Service
@@ -54,7 +51,6 @@ public class UserService {
 
 
     }
-
 
     public boolean insert(Users users) {
         if (userRepository.existsById(users.getMobileNumber())) {
