@@ -1,11 +1,9 @@
 package com.example.virtualLearning.repository;
 
-
-import com.example.virtualLearning.entity.OtpToken;
+import com.example.virtualLearning.tables.CourseTable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface OtpRepository extends JpaRepository<OtpToken, Long> {
-
+public interface CourseRepository extends JpaRepository<CourseTable,Long> {
 }

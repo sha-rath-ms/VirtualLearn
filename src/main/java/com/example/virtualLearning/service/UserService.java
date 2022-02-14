@@ -5,6 +5,7 @@ import com.example.virtualLearning.entity.Users;
 import com.example.virtualLearning.exceptions.CustomExceptions;
 import com.example.virtualLearning.repository.OtpRepository;
 import com.example.virtualLearning.repository.UserRepository;
+import com.example.virtualLearning.response.ResultInfo;
 import com.example.virtualLearning.response.ResultInfoConstants;
 import com.example.virtualLearning.tables.UserTable;
 import com.example.virtualLearning.validations.Validations;
@@ -27,11 +28,10 @@ public class UserService {
     private final Validations validations;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    @Autowired
     private final OtpRepository otpRepository;
 
-    public void sendOtp(String mobileNumber) {
-
+    public void sendOtp(Long mobileNumber) {
+        validations.validateMobileNumber(mobileNumber);
         try {
             otpRepository.deleteById(mobileNumber);
         } catch (Exception ignored) {
@@ -41,9 +41,18 @@ public class UserService {
 
     }
 
-    private boolean verifyOtp(String mobileNumber, int otp) {
+    public void verifyOtp(Long mobileNumber, int otp) {
        OtpToken otpToken = otpRepository.findById(mobileNumber).orElseThrow();
-        return otpToken.getOtp() == otp;
+       boolean verification=otpToken.getOtp() == otp;
+       if(verification){
+           otpToken.setVerification(true);
+           otpRepository.save(otpToken);
+       }
+       else{
+           throw new CustomExceptions(ResultInfoConstants.INVALID_OTP);
+       }
+
+
     }
 
 
@@ -54,7 +63,14 @@ public class UserService {
         }
         validations.validateMobileNumber(users.getMobileNumber());
         validations.validateEmail(users.getEmail());
-        userRepository.save(users.toUserTable(passwordEncoder));
+        OtpToken otpToken = otpRepository.findById(users.getMobileNumber()).orElseThrow();
+        if(otpToken.getVerification()){
+            userRepository.save(users.toUserTable(passwordEncoder));
+            otpRepository.deleteById(users.getMobileNumber());
+        }
+        else{
+            throw new CustomExceptions(ResultInfoConstants.OTP_NOT_VALIDATED);
+        }
         return true;
     }
     public void forgotPassword(Long mobileNumber) {
@@ -63,16 +79,17 @@ public class UserService {
         if (inBase.isEmpty()) {
             throw new CustomExceptions(ResultInfoConstants.INVALID_USER);
         }
-        sendOtp(mobileNumber.toString());
+        sendOtp(mobileNumber);
     }
 
-    public void updateUser(Users user, int otp) {
-        if (verifyOtp(user.getMobileNumber().toString(), otp)) {
-            UserTable updatedUser = user.toUserTable(passwordEncoder);
-            //TODO: ADD equalent of userrepository.updateuser(mobilenumber,password)
-            otpRepository.deleteById(user.getMobileNumber().toString());
-        } else {
-            throw new CustomExceptions(ResultInfoConstants.INVALID_USER);
+    public void updateUser(Long mobileNumber,String newPassword) {
+        if(otpRepository.getById(mobileNumber).getVerification()){
+            UserTable oldUser = userRepository.findById(mobileNumber).orElseThrow();
+            oldUser.setPassword(passwordEncoder.encode(newPassword));
+            userRepository.save(oldUser);
+        }
+       else{
+           throw new CustomExceptions(ResultInfoConstants.OTP_NOT_VALIDATED);
         }
 
     }
