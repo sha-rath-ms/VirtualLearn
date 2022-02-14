@@ -2,6 +2,7 @@ package com.example.virtualLearning.controller;
 
 import com.example.virtualLearning.entity.Users;
 import com.example.virtualLearning.response.ResponseWrapper;
+import com.example.virtualLearning.response.ResultInfo;
 import com.example.virtualLearning.response.ResultInfoConstants;
 import com.example.virtualLearning.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -23,4 +24,17 @@ public class UserController {
     public ResponseWrapper signUp(@RequestBody @Valid Users user) {
         return new ResponseWrapper(ResultInfoConstants.SUCCESS, userService.insert(user));
     }
+    @PostMapping("/send-otp/{mobileNumber}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseWrapper sendOtp(@PathVariable("mobileNumber") Long mobileNumber) {
+        userService.sendOtp(mobileNumber);
+        return new ResponseWrapper(ResultInfoConstants.OTP_SENT,null);
+    }
+    @PutMapping("/verify-otp")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseWrapper verifyOtp(@RequestHeader("mobileNumber") Long mobileNumber,@RequestHeader("otp") Integer otp){
+        userService.verifyOtp(mobileNumber,otp);
+        return new ResponseWrapper(ResultInfoConstants.OTP_VERIFIED,null);
+    }
+
 }
