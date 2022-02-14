@@ -1,5 +1,6 @@
 package com.example.virtualLearning.tables;
 
+import com.example.virtualLearning.entity.Category;
 import com.example.virtualLearning.entity.Course;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,14 +20,16 @@ public class CourseTable {
     private String name;
     @Column(name = "image_url")
     private String imageUrl;
+    private Category category;
 
-    public CourseTable(String name, String imageUrl) {
+    public CourseTable(String name, String imageUrl, Category category) {
         this.name = name;
         this.imageUrl = imageUrl;
+        this.category = category;
     }
 
     public Course toCourse()
     {
-        return new Course(this.id,this.name,this.imageUrl);
+        return new Course(this.id,this.name,this.imageUrl,this.category);
     }
 }

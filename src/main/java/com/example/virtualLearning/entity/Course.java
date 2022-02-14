@@ -12,15 +12,18 @@ public class Course {
     private final String name;
     @NotNull
     private final String imageUrl;
+    @NotNull
+    private final Category category;
 
-    public Course(long id, String name, String imageUrl) {
+    public Course(long id, String name, String imageUrl, Category category) {
         this.id = id;
         this.name = name;
         this.imageUrl = imageUrl;
+        this.category = category;
     }
 
     public CourseTable toCourseTable()
     {
-        return new CourseTable(this.name,this.imageUrl);
+        return new CourseTable(this.name,this.imageUrl,this.category);
     }
 }
