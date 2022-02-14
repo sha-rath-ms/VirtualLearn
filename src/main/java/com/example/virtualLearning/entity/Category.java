@@ -3,10 +3,10 @@ package com.example.virtualLearning.entity;
 public enum Category {
     DESIGN,
     DEVELOPMENT,
-    BUSSINESS,
+    BUSINESS,
     MARKETING,
     PHOTOGRAPHY,
-    FINANACE,
+    FINANCE,
     IT_AND_SOFTWARE,
     LIFESTYLE,
     MUSIC,

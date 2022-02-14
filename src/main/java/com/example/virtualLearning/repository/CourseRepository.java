@@ -11,7 +11,11 @@ import org.springframework.stereotype.Repository;
 public interface CourseRepository extends JpaRepository<CourseTable, Long> {
     Page<CourseTable> findById(long id);
 
-    @Query(value = "select * from course_tbl  where name LIKE %:courseName%", nativeQuery = true)
-    Page<CourseTable> search(String courseName, Pageable pageable);
+    @Query(value = "select * from course_tbl  where name LIKE %:courseName% and category=:filter", nativeQuery = true)
+    Page<CourseTable> search(String courseName, String filter, Pageable pageable);
+
+
+    @Query(value = "select * from course_tbl  where category=:category", nativeQuery = true)
+    Page<CourseTable> findByCategory(String category, Pageable pageable);
 
 }

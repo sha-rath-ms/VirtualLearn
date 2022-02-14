@@ -5,8 +5,13 @@ import com.example.virtualLearning.entity.SubCategories;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 @Data
 @AllArgsConstructor
+@Entity
+@Table(name = "subcategory_tbl")
 public class SubcategoryTable {
     private Category category;
     private String subcategory;

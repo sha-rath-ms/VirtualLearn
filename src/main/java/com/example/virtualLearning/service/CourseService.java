@@ -39,10 +39,18 @@ public class CourseService {
         return courseTable;
     }
 
-    public List<CourseTable> search(String courseName, int pageNo) {
+    public List<CourseTable> search(String courseName, String filter, int pageNo) {
         Pageable paging = PageRequest.of(pageNo, pageLimit);
+        Page<CourseTable> pagedResult = courseRepository.search(courseName, filter, paging);
+        if (pagedResult.hasContent()) {
+            return pagedResult.getContent();
+        }
+        return Collections.emptyList();
+    }
 
-        Page<CourseTable> pagedResult = courseRepository.search(courseName, paging);
+    public List<CourseTable> getByCategory(String category, int pageNo) {
+        Pageable paging = PageRequest.of(pageNo, pageLimit);
+        Page<CourseTable> pagedResult = courseRepository.findByCategory(category, paging);
         if (pagedResult.hasContent()) {
             return pagedResult.getContent();
         }

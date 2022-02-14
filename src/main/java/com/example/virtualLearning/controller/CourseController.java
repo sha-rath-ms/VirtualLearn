@@ -4,7 +4,6 @@ import com.example.virtualLearning.response.ResponseWrapper;
 import com.example.virtualLearning.response.ResultInfoConstants;
 import com.example.virtualLearning.service.CourseService;
 import com.example.virtualLearning.tables.CourseTable;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -33,7 +32,7 @@ public class CourseController {
 
     @GetMapping("/course/search")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseWrapper<List<CourseTable>> search(@RequestBody String courseName, @RequestParam(defaultValue = "0") int pageNo) {
-        return new ResponseWrapper(ResultInfoConstants.SUCCESS, courseService.search(courseName, pageNo));
+    public ResponseWrapper<List<CourseTable>> search(@RequestParam String course, @RequestParam String filter, @RequestParam(defaultValue = "0") int pageNo) {
+        return new ResponseWrapper(ResultInfoConstants.SUCCESS, courseService.search(course, filter, pageNo));
     }
 }
