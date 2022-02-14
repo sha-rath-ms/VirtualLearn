@@ -21,15 +21,17 @@ public class CourseTable {
     @Column(name = "image_url")
     private String imageUrl;
     private Category category;
+    private String subcategory;
 
-    public CourseTable(String name, String imageUrl, Category category) {
+    public CourseTable(String name, String imageUrl, Category category, String subcategory) {
         this.name = name;
         this.imageUrl = imageUrl;
         this.category = category;
+        this.subcategory = subcategory;
     }
 
     public Course toCourse()
     {
-        return new Course(this.id,this.name,this.imageUrl,this.category);
+        return new Course(this.id, this.name, this.imageUrl, this.category, this.subcategory);
     }
 }

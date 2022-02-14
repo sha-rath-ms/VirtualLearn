@@ -15,4 +15,5 @@ public class ResultInfoConstants {
     public static final ResultInfo OTP_NOT_VALIDATED = new ResultInfo("OTP was not verified before register");
     public static final ResultInfo OTP_VERIFIED = new ResultInfo("OTP was verified successfully");
     public static final ResultInfo INVALID_ID = new ResultInfo("Invalid id");
+    public static final ResultInfo DUPLICATE_SUBCATEGORY = new ResultInfo("SubCategory is already present, enter new subcategory");
 }

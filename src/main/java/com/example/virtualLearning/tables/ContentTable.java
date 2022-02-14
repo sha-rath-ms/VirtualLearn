@@ -2,9 +2,7 @@ package com.example.virtualLearning.tables;
 
 import com.example.virtualLearning.entity.Content;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,8 +21,6 @@ public class ContentTable {
     private boolean completed;
     @Column(name = "chapter_id")
     private long chapterId;
-    @Getter
-    @Setter
     @Column(name = "time_stamp")
     private String timeStamp;
 
