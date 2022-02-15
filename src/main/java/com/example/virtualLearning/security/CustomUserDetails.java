@@ -1,37 +1,39 @@
 package com.example.virtualLearning.security;
 
+
 import com.example.virtualLearning.tables.UserTable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 
-public class MyUserDetails implements UserDetails {
 
-    private final String username;
-    private final String password;
+public class CustomUserDetails implements UserDetails {
 
-    public MyUserDetails(UserTable userTable) {
-        this.username = Long.toString(userTable.getMobileNumber());
-        this.password = userTable.getPassword();
+    private final UserTable user;
+
+    public CustomUserDetails(UserTable user) {
+        super();
+        this.user = user;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("USER"));
+        return Collections.singleton(new SimpleGrantedAuthority("USER"));
     }
 
     @Override
     public String getPassword() {
-        return password;
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return username;
+        return Long.toString(user.getMobileNumber());
     }
+
 
     @Override
     public boolean isAccountNonExpired() {
@@ -53,4 +55,3 @@ public class MyUserDetails implements UserDetails {
         return true;
     }
 }
-

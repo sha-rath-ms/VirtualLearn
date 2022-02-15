@@ -25,6 +25,7 @@ public class OtpToken {
     @Id
     @Column(name = "mobile_number")
     private Long mobileNumber;
+    @Column(name="otp")
     private int Otp;
     private Boolean verification=false;
 

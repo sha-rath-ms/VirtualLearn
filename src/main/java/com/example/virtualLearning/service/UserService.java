@@ -44,6 +44,7 @@ public class UserService {
        if(verification){
            otpToken.setVerification(true);
            otpRepository.save(otpToken);
+
        }
        else{
            throw new CustomExceptions(ResultInfoConstants.INVALID_OTP);
