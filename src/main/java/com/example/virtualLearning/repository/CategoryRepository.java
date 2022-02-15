@@ -1,10 +1,10 @@
 package com.example.virtualLearning.repository;
 
 
-import com.example.virtualLearning.tables.UserTable;
+import com.example.virtualLearning.tables.CategoryTable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CategoryRepository extends JpaRepository<UserTable, Long> {
+public interface CategoryRepository extends JpaRepository<CategoryTable, Long> {
 }

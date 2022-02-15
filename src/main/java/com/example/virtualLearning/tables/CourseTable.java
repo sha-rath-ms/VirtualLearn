@@ -1,6 +1,6 @@
 package com.example.virtualLearning.tables;
 
-import com.example.virtualLearning.entity.Course;
+import com.example.virtualLearning.response.ResponseAllCourse;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -18,15 +18,19 @@ public class CourseTable {
     private String imageUrl;
     private long categoryId;
     private String overview;
+    private long instructorId;
+    private int cost;
 
-    public CourseTable(String name, String imageUrl, long categoryId, String overview) {
+    public CourseTable(String name, String imageUrl, long categoryId, String overview, long instructorId, int cost) {
         this.name = name;
         this.imageUrl = imageUrl;
         this.categoryId = categoryId;
         this.overview = overview;
+        this.instructorId = instructorId;
+        this.cost = cost;
     }
 
-    public Course toCourse() {
-        return new Course(this.id, this.name, this.imageUrl, this.categoryId, this.overview);
+    public ResponseAllCourse responseAllCourse() {
+        return new ResponseAllCourse(this.id, this.name, this.imageUrl);
     }
 }
