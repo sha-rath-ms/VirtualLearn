@@ -17,14 +17,14 @@ public class CourseController {
     @GetMapping("/{categoryId}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseWrapper getAllByCategory(@RequestParam(defaultValue = "0") Integer pageNo, @PathVariable long categoryId) {
-        return new ResponseWrapper(ResultInfoConstants.SUCCESS, courseService.getAllByCategory(pageNo, categoryId));
+        return new ResponseWrapper(ResultInfoConstants.SUCCESS, courseService.getAll(pageNo, categoryId));
     }
 
-    @GetMapping()
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseWrapper getAll(@RequestParam(defaultValue = "0") Integer pageNo) {
-        return new ResponseWrapper(ResultInfoConstants.SUCCESS, courseService.getAll(pageNo));
-    }
+//    @GetMapping()
+//    @ResponseStatus(HttpStatus.OK)
+//    public ResponseWrapper getAll(@RequestParam(defaultValue = "0") Integer pageNo) {
+//        return new ResponseWrapper(ResultInfoConstants.SUCCESS, courseService.getAll(pageNo));
+//    }
 
     @GetMapping("/course/{courseId}")
     @ResponseStatus(HttpStatus.OK)

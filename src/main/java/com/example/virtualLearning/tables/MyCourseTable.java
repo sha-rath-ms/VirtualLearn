@@ -15,6 +15,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 public class MyCourseTable {
     @Id
+    private long id;
     private Long mobileNumber;
     private Long courseId;
 }
