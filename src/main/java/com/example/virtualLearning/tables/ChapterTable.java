@@ -1,6 +1,6 @@
 package com.example.virtualLearning.tables;
 
-import com.example.virtualLearning.entity.Category;
+import com.example.virtualLearning.entity.Chapter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -10,21 +10,20 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "category_tbl")
+@Table(name = "chapter_tbl")
 @AllArgsConstructor
-public class CategoryTable {
+public class ChapterTable {
     @Id
     private long id;
     private String name;
+    private long courseId;
 
-    public CategoryTable() {
-    }
-
-    public CategoryTable(String name) {
+    public ChapterTable(String name, long courseId) {
         this.name = name;
+        this.courseId = courseId;
     }
 
-    public Category toCategory() {
-        return new Category(this.name);
+    public Chapter toChapter() {
+        return new Chapter(this.id, this.name, this.courseId);
     }
 }
