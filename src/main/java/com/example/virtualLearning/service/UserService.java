@@ -90,4 +90,27 @@ public class UserService {
         }
 
     }
+
+    public void updateUserDetails(Users users)
+    {
+        Optional<UserTable> oldUser = userRepository.findById(users.getMobileNumber());
+        if(!oldUser.isPresent())
+        {
+            throw new CustomExceptions(ResultInfoConstants.INVALID_ID);
+        }
+        users.setPassword(oldUser.get().getPassword());
+        userRepository.save(users.toUpdateUserTable());
+    }
+
+    public void changePassword(long userId,String password)
+    {
+        Optional<UserTable> oldUser = userRepository.findById(userId);
+        if(!oldUser.isPresent())
+        {
+            throw new CustomExceptions(ResultInfoConstants.INVALID_ID);
+        }
+        Users newUser = oldUser.get().toUsers();
+        newUser.setPassword(password);
+        userRepository.save(newUser.toUserTable(passwordEncoder));
+    }
 }
