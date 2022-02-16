@@ -2,6 +2,7 @@ package com.example.virtualLearning.tables;
 
 import com.example.virtualLearning.response.ResponseAllCourse;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,6 +11,7 @@ import javax.persistence.Table;
 @Data
 @Entity
 @Table(name = "course_tbl")
+@NoArgsConstructor
 
 public class CourseTable {
     @Id
@@ -30,7 +32,9 @@ public class CourseTable {
         this.cost = cost;
     }
 
-    public ResponseAllCourse responseAllCourse() {
+   public ResponseAllCourse responseAllCourse() {
         return new ResponseAllCourse(this.id, this.name, this.imageUrl);
     }
+
+
 }

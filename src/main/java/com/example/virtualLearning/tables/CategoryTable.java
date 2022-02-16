@@ -17,6 +17,9 @@ public class CategoryTable {
     private long id;
     private String name;
 
+    public CategoryTable() {
+    }
+
     public CategoryTable(String name) {
         this.name = name;
     }

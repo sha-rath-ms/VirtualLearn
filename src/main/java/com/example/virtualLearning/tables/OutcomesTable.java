@@ -3,6 +3,7 @@ package com.example.virtualLearning.tables;
 import com.example.virtualLearning.entity.Outcomes;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -12,6 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "outcomes_tbl")
 @AllArgsConstructor
+@NoArgsConstructor
 public class OutcomesTable {
     @Id
     private long id;
