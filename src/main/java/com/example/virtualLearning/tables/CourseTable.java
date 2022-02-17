@@ -25,18 +25,18 @@ public class CourseTable {
     private boolean featured;
     private boolean beginner;
 
-    public CourseTable(String name, String imageUrl, long categoryId, String overview, long instructorId, int cost,boolean featured,boolean beginner) {
+    public CourseTable(String name, String imageUrl, long categoryId, String overview, long instructorId, int cost, boolean featured, boolean beginner) {
         this.name = name;
         this.imageUrl = imageUrl;
         this.categoryId = categoryId;
         this.overview = overview;
         this.instructorId = instructorId;
         this.cost = cost;
-        this.featured=featured;
-        this.beginner=beginner;
+        this.featured = featured;
+        this.beginner = beginner;
     }
 
-   public ResponseAllCourse responseAllCourse() {
+    public ResponseAllCourse responseAllCourse() {
         return new ResponseAllCourse(this.id, this.name, this.imageUrl);
     }
 

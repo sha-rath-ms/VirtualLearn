@@ -1,6 +1,8 @@
 package com.example.virtualLearning.tables;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -8,13 +10,12 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "benefits_tbl")
+@Table(name = "my_course_tbl")
 @AllArgsConstructor
-@Getter
-@Setter
 @NoArgsConstructor
 public class MyCourseTable {
     @Id
+    private long id;
     private Long mobileNumber;
     private Long courseId;
-   }
+}

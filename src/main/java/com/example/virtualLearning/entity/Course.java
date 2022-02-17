@@ -30,7 +30,7 @@ public class Course {
     private boolean featured;
     private boolean beginner;
 
-    public Course(String name, String imageUrl, long categoryId, String overview, String subcategoryId, long instructorId, int cost,boolean featured,boolean beginner) {
+    public Course(String name, String imageUrl, long categoryId, String overview, String subcategoryId, long instructorId, int cost, boolean featured, boolean beginner) {
         this.name = name;
         this.imageUrl = imageUrl;
         this.categoryId = categoryId;
@@ -38,12 +38,12 @@ public class Course {
         this.subcategoryId = subcategoryId;
         this.instructorId = instructorId;
         this.cost = cost;
-        this.featured=featured;
-        this.beginner=beginner;
+        this.featured = featured;
+        this.beginner = beginner;
     }
 
     public CourseTable toCourseTable() {
-        return new CourseTable(this.name, this.imageUrl, this.categoryId, this.overview, this.instructorId, this.cost,this.featured,this.beginner);
+        return new CourseTable(this.name, this.imageUrl, this.categoryId, this.overview, this.instructorId, this.cost, this.featured, this.beginner);
     }
 
 }

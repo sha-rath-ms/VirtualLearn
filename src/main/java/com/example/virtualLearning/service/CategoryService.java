@@ -13,7 +13,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,13 +28,11 @@ public class CategoryService {
     private final SubcategoryRepository subCategoryRepository;
 
 
-    public List<Category> getAll()
-    {
+    public List<Category> getAll() {
         return categoryRepository.findAll().stream().map(CategoryTable::toCategory).collect(Collectors.toList());
     }
 
-    public List<Category> displayCategoriesAtHomePage(int pageNo)
-    {
+    public List<Category> displayCategoriesAtHomePage(int pageNo) {
         Pageable paging = (Pageable) PageRequest.of(pageNo, PAGE_LIMIT);
         Page<CategoryTable> pagedResult = categoryRepository.findAll(paging);
         if (!pagedResult.hasContent()) {
@@ -45,22 +42,26 @@ public class CategoryService {
     }
 
     //Inside category operations from here
-    public List<CourseTable> getFeaturedCourses(Long categoryId){
+    public List<CourseTable> getFeaturedCourses(Long categoryId) {
         return courseRepository.getFeaturedCourses(categoryId);
 
     }
-    public List<CourseTable> getBeginnerCourses(Long categoryId){
+
+    public List<CourseTable> getBeginnerCourses(Long categoryId) {
         return courseRepository.getBeginnerCourses(categoryId);
     }
-    public List<SubcategoryTable> getSubcategoryList(Long categoryId){
+
+    public List<SubcategoryTable> getSubcategoryList(Long categoryId) {
         return subCategoryRepository.findByCategoryId(categoryId);
     }
+
     //Overloaded method
-    public List<CourseTable> getAllCourses(Long categoryId){
-        return courseRepository.getAllCourseByCategoryId(categoryId,PageRequest.of(0,10)).toList();
+    public List<CourseTable> getAllCourses(Long categoryId) {
+        return courseRepository.getAllCourseByCategoryId(categoryId, PageRequest.of(0, 10)).toList();
     }
-    public List<CourseTable> getAllCourses(Long categoryId, Integer page){
-        return courseRepository.getAllCourseByCategoryId(categoryId,PageRequest.of(page,10)).toList();
+
+    public List<CourseTable> getAllCourses(Long categoryId, Integer page) {
+        return courseRepository.getAllCourseByCategoryId(categoryId, PageRequest.of(page, 10)).toList();
     }
 
 }
