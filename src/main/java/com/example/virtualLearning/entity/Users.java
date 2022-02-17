@@ -1,7 +1,6 @@
 package com.example.virtualLearning.entity;
 
 import com.example.virtualLearning.tables.UserTable;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -9,7 +8,6 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
 @Data
-@AllArgsConstructor
 public class Users {
     @Id
     private Long mobileNumber;
@@ -45,6 +43,6 @@ public class Users {
     }
 
     public UserTable toUpdateUserTable() {
-        return new UserTable(this.mobileNumber, this.fullName, this.username, this.email,this.password, this.occupation, this.gender, this.dob, this.twitterLink, this.facebookLink);
+        return new UserTable(this.mobileNumber, this.fullName, this.username, this.email, this.password, this.occupation, this.gender, this.dob, this.twitterLink, this.facebookLink);
     }
 }
