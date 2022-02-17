@@ -28,6 +28,6 @@ public class QuestionAndAnswersTable {
 
     public QuestionAndAnswers questionAndAnswers() {
         String[] getOptions = ConvertOptions.getOptions(this.options);
-        return new QuestionAndAnswers(this.id, this.question, getOptions[0], getOptions[1], getOptions[3], getOptions[4], this.answer, this.chapterTestId);
+        return new QuestionAndAnswers(this.id, this.question, getOptions[0], getOptions[1], getOptions[2], getOptions[3], this.answer, this.chapterTestId);
     }
 }
