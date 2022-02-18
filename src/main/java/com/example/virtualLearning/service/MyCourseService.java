@@ -8,6 +8,7 @@ import com.example.virtualLearning.tables.MyCourseTable;
 import lombok.RequiredArgsConstructor;
 import net.bytebuddy.description.type.TypeList;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.sql.Array;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class MyCourseService {
+
     public final MyCourseRepository myCourseRepository;
     public final CourseRepository courseRepository;
     public List<CourseTable> getAllMyCourses(Long mobileNumber, Integer page){
@@ -42,10 +44,15 @@ public class MyCourseService {
     private boolean checkIfCourseExists(Long mobileNumber,Long courseId){
         return myCourseRepository.existsByMobileNumberAndCourseId(mobileNumber,courseId);
     }
-    //TODO: from here
-    public void  displayCompletedCourses(){
+
+    public List<CourseTable>  displayCompletedCourses(Long mobileNumber,Integer page){
+        return getListFromId(myCourseRepository.findAllCompleted(mobileNumber,PageRequest.of(page,Constants.pageLimit)));
     }
-    public void displayCertificate(){
+    public String displayCertificate(Long mobileNumber,Long courseId){
+        return myCourseRepository.getCertificate(mobileNumber,courseId);
+    }
+    public List<CourseTable>  displayOngoingCourses(Long mobileNumber,Integer page){
+        return getListFromId(myCourseRepository.findAllOngoing(mobileNumber,PageRequest.of(page,Constants.pageLimit)));
     }
 
 

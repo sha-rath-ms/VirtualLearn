@@ -1,5 +1,6 @@
 package com.example.virtualLearning.service;
 
+import com.example.virtualLearning.constants.Constants;
 import com.example.virtualLearning.entity.Instructor;
 import com.example.virtualLearning.exceptions.CustomExceptions;
 import com.example.virtualLearning.repository.BenefitsRepository;
@@ -25,7 +26,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CourseService {
 
-    private static final int PAGE_LIMIT = 5;
+
 
     private final CourseRepository courseRepository;
 
@@ -36,7 +37,7 @@ public class CourseService {
     private final InstructorRepository instructorRepository;
 
     public List<ResponseAllCourse> getAll(int pageNo, long categoryId) {
-        Pageable paging = (Pageable) PageRequest.of(pageNo, PAGE_LIMIT);
+        Pageable paging = (Pageable) PageRequest.of(pageNo, Constants.pageLimit);
         Page<CourseTable> pagedResult = courseRepository.getAllCourseByCategoryId(categoryId, paging);
         if (!pagedResult.hasContent()) {
             return Collections.emptyList();

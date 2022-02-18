@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/virtual-learn")
+@RequestMapping("/virtual-learn/chapter")
 public class ChapterController {
 
     private final ChapterService chapterService;
 
-    @GetMapping("/chapter/{courseId}")
+    @GetMapping("/{courseId}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseWrapper<Chapter> getAllByCourse(@PathVariable long courseId) {
         return new ResponseWrapper(ResultInfoConstants.SUCCESS, chapterService.getAllByCourse(courseId));

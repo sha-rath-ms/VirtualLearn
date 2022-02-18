@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
 @Data
-@AllArgsConstructor
+
 public class Users {
     @Id
     private Long mobileNumber;
