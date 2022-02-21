@@ -7,9 +7,9 @@ import lombok.Data;
 public class Subcategory {
     private long id;
     private String name;
-    private String categoryId;
+    private long categoryId;
 
-    public Subcategory(String name, String categoryId) {
+    public Subcategory(String name, long categoryId) {
         this.name = name;
         this.categoryId = categoryId;
     }

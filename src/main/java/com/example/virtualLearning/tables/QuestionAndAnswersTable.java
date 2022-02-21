@@ -5,18 +5,20 @@ import com.example.virtualLearning.extract.ConvertOptions;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
 @Table(name = "quiz_tbl")
 @AllArgsConstructor
 public class QuestionAndAnswersTable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String question;
     private String options;
     private String answer;
+    @Column(name = "chapter_test_id")
     private long chapterTestId;
 
     public QuestionAndAnswersTable(String question, String options, String answer, long chapterTestId) {

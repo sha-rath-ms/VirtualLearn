@@ -4,9 +4,7 @@ import com.example.virtualLearning.entity.Content;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -14,9 +12,12 @@ import javax.persistence.Table;
 @AllArgsConstructor
 public class ContentTable {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
+    @Column(name = "content_url")
     private String contentUrl;
+    @Column(name = "chapter_id")
     private long chapterId;
 
     public ContentTable(String name, String contentUrl, long chapterId) {

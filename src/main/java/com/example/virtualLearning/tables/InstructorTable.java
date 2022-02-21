@@ -2,15 +2,20 @@ package com.example.virtualLearning.tables;
 
 import com.example.virtualLearning.entity.Instructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
+@Entity
+@Table(name = "instructor_tbl")
+@NoArgsConstructor
 public class InstructorTable {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
+    @Column(name = "image_url")
     private String imageUrl;
     private String about;
 
