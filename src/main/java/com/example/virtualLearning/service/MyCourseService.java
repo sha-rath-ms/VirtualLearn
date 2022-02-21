@@ -23,9 +23,11 @@ public class MyCourseService {
 
     public final MyCourseRepository myCourseRepository;
     public final CourseRepository courseRepository;
+
     public List<CourseTable> getAllMyCourses(Long mobileNumber, Integer page){
         return getListFromId(myCourseRepository.findAllwithMobileNumber(mobileNumber,PageRequest.of(page,Constants.pageLimit)));
     }
+
     public void addCourse(Long mobileNumber,Long courseId){
             myCourseRepository.save(new MyCourseTable(mobileNumber,courseId));
     }
@@ -35,13 +37,16 @@ public class MyCourseService {
     private List<CourseTable> getListFromId(List<MyCourseTable> gotCourse) {
         List<Long> idlist = gotCourse.stream().map(MyCourseTable::getCourseId).collect(Collectors.toList());
         List<CourseTable> ct =new ArrayList<CourseTable>();
+//        idlist.forEach(i -> {
+//            ct.add(courseRepository.getById(i));
+//        });
         for (Long aLong : idlist) {
             ct.add(courseRepository.getById(aLong));
         }
         return ct;
     }
 
-    private boolean checkIfCourseExists(Long mobileNumber,Long courseId){
+    public boolean checkIfCourseExists(Long mobileNumber,Long courseId){
         return myCourseRepository.existsByMobileNumberAndCourseId(mobileNumber,courseId);
     }
 
@@ -54,6 +59,7 @@ public class MyCourseService {
     public List<CourseTable>  displayOngoingCourses(Long mobileNumber,Integer page){
         return getListFromId(myCourseRepository.findAllOngoing(mobileNumber,PageRequest.of(page,Constants.pageLimit)));
     }
+
 
 
 

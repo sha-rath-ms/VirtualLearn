@@ -47,12 +47,12 @@ public class CourseService {
 
     public ResponseCourseDetails getById(long courseId) {
         Optional<CourseTable> courseTable = courseRepository.getById(courseId);
-        List<String> benefits = benefitsRepository.getAll(courseId);
-        List<String> outcomes = outcomeRepository.getAll(courseId);
-        Instructor instructor = instructorRepository.findById(courseTable.get().getInstructorId()).get().toInstructor();
         if (!courseTable.isPresent()) {
             throw new CustomExceptions(ResultInfoConstants.INVALID_ID);
         }
+        List<String> benefits = benefitsRepository.getAll(courseId);
+        List<String> outcomes = outcomeRepository.getAll(courseId);
+        Instructor instructor = instructorRepository.findById(courseTable.get().getInstructorId()).get().toInstructor();
         return new ResponseCourseDetails(courseTable.get(), benefits, outcomes, instructor);
     }
 }
