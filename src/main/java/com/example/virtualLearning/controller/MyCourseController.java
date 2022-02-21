@@ -5,12 +5,14 @@ import com.example.virtualLearning.response.ResultInfoConstants;
 import com.example.virtualLearning.security.JwtUtility;
 import com.example.virtualLearning.service.CourseService;
 import com.example.virtualLearning.service.MyCourseService;
+import com.example.virtualLearning.tables.CourseTable;
 import com.example.virtualLearning.tables.MyCourseTable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,40 +23,39 @@ public class MyCourseController {
 
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseWrapper add(@RequestHeader("course-id") Long courseId,@RequestHeader("Authorization") String token) {
+    public ResponseWrapper<String> add(@RequestHeader("course-id") Long courseId,@RequestHeader("Authorization") String token) {
         Long userId = Long.parseLong(jwtUtility.getUserId(token));
         myCourseService.addCourse(userId,courseId);
-        return new ResponseWrapper(ResultInfoConstants.SUCCESS, null);
+        return new ResponseWrapper<String>(ResultInfoConstants.SUCCESS, null);
     }
     @GetMapping("/display-all")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseWrapper displayAll(@RequestHeader("course-id") Long courseId,@RequestHeader("Authorization") String token) {
+    public ResponseWrapper<String> displayAll(@RequestHeader("course-id") Long courseId,@RequestHeader("Authorization") String token,@RequestHeader("page") Integer page) {
         Long userId = Long.parseLong(jwtUtility.getUserId(token));
-        myCourseService.addCourse(userId,courseId);
-        return new ResponseWrapper(ResultInfoConstants.SUCCESS, null);
+        myCourseService.getAllMyCourses(userId,page);
+        return new ResponseWrapper<String>(ResultInfoConstants.SUCCESS, null);
     }
     @GetMapping("/display-completed")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseWrapper displayCompleted(@RequestHeader("course-id") Long courseId,@RequestHeader("Authorization") String token,@RequestHeader("page") Integer page) {
+    public ResponseWrapper<List<CourseTable>> displayCompleted(@RequestHeader("course-id") Long courseId, @RequestHeader("Authorization") String token, @RequestHeader("page") Integer page) {
         Long userId = Long.parseLong(jwtUtility.getUserId(token));
         page= page==null?0:page;
-        myCourseService.displayCompletedCourses(userId,page);
-        return new ResponseWrapper(ResultInfoConstants.SUCCESS, null);
+        return new ResponseWrapper<>(ResultInfoConstants.SUCCESS,   myCourseService.displayCompletedCourses(userId,page));
     }
     @GetMapping("/display-ongoing")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseWrapper displayOngoing(@RequestHeader("course-id") Long courseId,@RequestHeader("Authorization") String token,@RequestHeader("page") Integer page) {
+    public ResponseWrapper<List<CourseTable>> displayOngoing(@RequestHeader("course-id") Long courseId,@RequestHeader("Authorization") String token,@RequestHeader("page") Integer page) {
         Long userId = Long.parseLong(jwtUtility.getUserId(token));
         page= page==null?0:page;
-        myCourseService.displayOngoingCourses(userId,page);
-        return new ResponseWrapper(ResultInfoConstants.SUCCESS, null);
+
+        return new ResponseWrapper<>(ResultInfoConstants.SUCCESS, myCourseService.displayOngoingCourses(userId,page));
     }
     @GetMapping("/display-certificate")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseWrapper displayCertificate(@RequestHeader("course-id") Long courseId,@RequestHeader("Authorization") String token) {
+    public ResponseWrapper<String> displayCertificate(@RequestHeader("course-id") Long courseId,@RequestHeader("Authorization") String token) {
         Long userId = Long.parseLong(jwtUtility.getUserId(token));
-        myCourseService.displayCertificate(userId,courseId);
-        return new ResponseWrapper(ResultInfoConstants.SUCCESS, null);
+
+        return new ResponseWrapper<>(ResultInfoConstants.SUCCESS, myCourseService.displayCertificate(userId,courseId));
     }
 
     //TODO Update mycourse request
