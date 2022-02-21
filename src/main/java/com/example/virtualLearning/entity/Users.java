@@ -15,15 +15,6 @@ public class Users {
     private String fullName;
     @NotBlank
     private String username;
-
-    public Users(Long mobileNumber, String fullName, String username, String email, String password) {
-        this.mobileNumber = mobileNumber;
-        this.fullName = fullName;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-    }
-
     @NotBlank
     private String email;
     @NotBlank
@@ -34,6 +25,13 @@ public class Users {
     private String twitterLink;
     private String facebookLink;
 
+    public Users(Long mobileNumber, String fullName, String username, String email, String password) {
+        this.mobileNumber = mobileNumber;
+        this.fullName = fullName;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
 
     public Users(Long mobileNumber, String fullName, String username, String email, String password, String occupation, String gender, String dob, String twitterLink, String facebookLink) {
         this.mobileNumber = mobileNumber;

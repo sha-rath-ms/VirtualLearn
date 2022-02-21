@@ -70,6 +70,7 @@ public class UserService {
         }
         return true;
     }
+
     public void forgotPassword(Long mobileNumber) {
 
         Optional<UserTable> inBase = userRepository.findById(mobileNumber);
@@ -88,12 +89,11 @@ public class UserService {
        else{
            throw new CustomExceptions(ResultInfoConstants.OTP_NOT_VALIDATED);
         }
-
     }
 
-    public void updateUserDetails(Users users)
+    public void updateUserDetails(long userId,Users users)
     {
-        Optional<UserTable> oldUser = userRepository.findById(users.getMobileNumber());
+        Optional<UserTable> oldUser = userRepository.findById(userId);
         if(!oldUser.isPresent())
         {
             throw new CustomExceptions(ResultInfoConstants.INVALID_ID);

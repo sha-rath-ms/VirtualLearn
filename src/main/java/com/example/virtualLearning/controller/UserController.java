@@ -72,5 +72,35 @@ public class UserController {
         return new JwtResponse(token);
     }
 
+    @PutMapping("/forgotPassword")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseWrapper forgotPassword(@RequestBody long mobileNumber)
+    {
+        userService.forgotPassword(mobileNumber);
+        return new ResponseWrapper(ResultInfoConstants.SUCCESS,null);
+    }
 
+    @PutMapping("/updatePassword")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseWrapper updatePassword(@RequestHeader("mobileNumber") long mobileNumber,@RequestHeader("newPassword") String newPassword)
+    {
+        userService.updateUser(mobileNumber,newPassword);
+        return new ResponseWrapper(ResultInfoConstants.SUCCESS,null);
+    }
+
+    @PutMapping("/updateProfile")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseWrapper updateProfile(@RequestBody @Valid Users users,@RequestHeader("Authorization") String token)
+    {
+        userService.updateUserDetails(Long.parseLong(jwtUtility.getUserId(token)),users);
+        return new ResponseWrapper(ResultInfoConstants.SUCCESS,null);
+    }
+
+    @PutMapping("/changePassword")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseWrapper changePassword(@RequestHeader("Authorization") String token,@RequestBody String password)
+    {
+        userService.changePassword(Long.parseLong(token),password);
+        return new ResponseWrapper(ResultInfoConstants.SUCCESS,null);
+    }
 }
