@@ -27,6 +27,7 @@ public class UserTable {
     private String dob;
     private String twitterLink;
     private String facebookLink;
+    private String role;
 
     public UserTable(long mobileNumber, String fullName, String username, String email, String password, String occupation, String gender, String dob, String twitterLink, String facebookLink) {
         this.mobileNumber = mobileNumber;
@@ -39,6 +40,7 @@ public class UserTable {
         this.dob = dob;
         this.twitterLink = twitterLink;
         this.facebookLink = facebookLink;
+        this.role="USER";
     }
 
     public Users toUsers() {

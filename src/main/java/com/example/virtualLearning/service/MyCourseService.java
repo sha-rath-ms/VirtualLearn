@@ -3,6 +3,7 @@ package com.example.virtualLearning.service;
 import com.example.virtualLearning.constants.Constants;
 import com.example.virtualLearning.repository.CourseRepository;
 import com.example.virtualLearning.repository.MyCourseRepository;
+import com.example.virtualLearning.response.ResponseAllCourse;
 import com.example.virtualLearning.tables.CourseTable;
 import com.example.virtualLearning.tables.MyCourseTable;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class MyCourseService {
     public final MyCourseRepository myCourseRepository;
     public final CourseRepository courseRepository;
 
-    public List<CourseTable> getAllMyCourses(Long mobileNumber, Integer page){
+    public List<ResponseAllCourse> getAllMyCourses(Long mobileNumber, Integer page){
         return getListFromId(myCourseRepository.findAllwithMobileNumber(mobileNumber,PageRequest.of(page,Constants.pageLimit)));
     }
 
@@ -33,36 +34,31 @@ public class MyCourseService {
     }
 
     //Method to fetch list of courses from list of courseid
-    //TODO:VERY INEFFICIENT WAY. OPTIMIZE IF POSSIBLE
-    private List<CourseTable> getListFromId(List<MyCourseTable> gotCourse) {
+    private List<ResponseAllCourse> getListFromId(List<MyCourseTable> gotCourse) {
         List<Long> idlist = gotCourse.stream().map(MyCourseTable::getCourseId).collect(Collectors.toList());
-        List<CourseTable> ct =new ArrayList<CourseTable>();
-//        idlist.forEach(i -> {
-//            ct.add(courseRepository.getById(i));
-//        });
+        List<ResponseAllCourse> courseTables =new ArrayList<ResponseAllCourse>();
         for (Long aLong : idlist) {
-            ct.add(courseRepository.getById(aLong));
+            courseTables.add(courseRepository.getById(aLong).responseAllCourse());
         }
-        return ct;
+        return courseTables;
     }
 
     public boolean checkIfCourseExists(Long mobileNumber,Long courseId){
         return myCourseRepository.existsByMobileNumberAndCourseId(mobileNumber,courseId);
     }
 
-    public List<CourseTable>  displayCompletedCourses(Long mobileNumber,Integer page){
+    public List<ResponseAllCourse>  displayCompletedCourses(Long mobileNumber,Integer page){
         return getListFromId(myCourseRepository.findAllCompleted(mobileNumber,PageRequest.of(page,Constants.pageLimit)));
     }
     public String displayCertificate(Long mobileNumber,Long courseId){
         return myCourseRepository.getCertificate(mobileNumber,courseId);
     }
-    public List<CourseTable>  displayOngoingCourses(Long mobileNumber,Integer page){
+    public List<ResponseAllCourse>  displayOngoingCourses(Long mobileNumber,Integer page){
         return getListFromId(myCourseRepository.findAllOngoing(mobileNumber,PageRequest.of(page,Constants.pageLimit)));
     }
-
-
-
-
-
+    public void updateCompleted(Long courseId,Long mobileNumber){
+        //Set completed equal 1 one;
+        //set certificate
+    }
 
 }

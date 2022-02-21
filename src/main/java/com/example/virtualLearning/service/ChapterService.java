@@ -36,7 +36,7 @@ public class ChapterService {
     }
 
     public ResponseChapterContent getChapterContent(long userId,long courseId,long chapterId) {
-        if(!myCourseService.checkIfCourseExists(userId,courseId))
+        if(myCourseService.checkIfCourseExists(userId, courseId))
         {
             throw new CustomExceptions(ResultInfoConstants.NOT_JOINED);
         }

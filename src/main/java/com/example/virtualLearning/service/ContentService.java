@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 public class ContentService {
 
     private final ContentRepository contentRepository;
-
     private final ChapterRepository chapterRepository;
 
     public List<Content> getByChapter(long chapterId) {
