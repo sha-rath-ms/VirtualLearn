@@ -25,7 +25,7 @@ public class ChapterService {
 
     private final CourseRepository courseRepository;
 
-    private final MyCourseService myCourseService;
+//    private final MyCourseService myCourseService;
 
     public List<Chapter> getAllByCourse(long courseId) {
         if(!courseRepository.findById(courseId).isPresent())
@@ -36,14 +36,13 @@ public class ChapterService {
     }
 
     public ResponseChapterContent getChapterContent(long userId,long courseId,long chapterId) {
-        if(myCourseService.checkIfCourseExists(userId, courseId))
-        {
-            throw new CustomExceptions(ResultInfoConstants.NOT_JOINED);
-        }
-        if(!chapterRepository.findById(chapterId).isPresent())
-        {
+//        if(myCourseService.checkIfCourseExists(userId, courseId))
+//        {
+//            throw new CustomExceptions(ResultInfoConstants.NOT_JOINED);
+//        }
+        if (!chapterRepository.findById(chapterId).isPresent()) {
             throw new CustomExceptions(ResultInfoConstants.INVALID_CHAPTER_ID);
         }
-        return new ResponseChapterContent(contentService.getByChapter(chapterId),chapterTestService.getByChapter(chapterId));
+        return new ResponseChapterContent(contentService.getByChapter(chapterId), chapterTestService.getByChapter(chapterId));
     }
 }

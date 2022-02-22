@@ -4,17 +4,12 @@ import com.example.virtualLearning.constants.Constants;
 import com.example.virtualLearning.repository.CourseRepository;
 import com.example.virtualLearning.repository.MyCourseRepository;
 import com.example.virtualLearning.response.ResponseAllCourse;
-import com.example.virtualLearning.tables.CourseTable;
 import com.example.virtualLearning.tables.MyCourseTable;
 import lombok.RequiredArgsConstructor;
-import net.bytebuddy.description.type.TypeList;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,7 +39,7 @@ public class MyCourseService {
     }
 
     public boolean checkIfCourseExists(Long mobileNumber,Long courseId){
-        return myCourseRepository.existsByMobileNumberAndCourseId(mobileNumber,courseId);
+        return myCourseRepository.existsByMobileNumberAndCourseId(mobileNumber, courseId).isPresent();
     }
 
     public List<ResponseAllCourse>  displayCompletedCourses(Long mobileNumber,Integer page){

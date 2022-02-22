@@ -35,7 +35,6 @@ public class UserService {
 
         }
         otpRepository.save(new OtpToken(mobileNumber));
-
     }
 
     public void verifyOtp(Long mobileNumber, int otp) {
@@ -49,7 +48,6 @@ public class UserService {
        else{
            throw new CustomExceptions(ResultInfoConstants.INVALID_OTP);
        }
-
 
     }
 

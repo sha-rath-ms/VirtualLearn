@@ -6,8 +6,10 @@ import com.example.virtualLearning.repository.ChapterRepository;
 import com.example.virtualLearning.repository.ChapterTestRepository;
 import com.example.virtualLearning.response.ResultInfoConstants;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
+@Service
 public class ChapterTestService {
 
     private final ChapterTestRepository chapterTestRepository;
