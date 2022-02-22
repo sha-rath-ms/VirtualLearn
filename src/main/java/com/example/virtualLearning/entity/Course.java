@@ -21,21 +21,20 @@ public class Course {
     @NotBlank
     private String overview;
     @NotNull
-    private String subcategoryId;
-    @NotNull
     private long instructorId;
     @NotNull
     @Min(100)
     private int cost;
+    @NotNull
     private boolean featured;
+    @NotNull
     private boolean beginner;
 
-    public Course(String name, String imageUrl, long categoryId, String overview, String subcategoryId, long instructorId, int cost, boolean featured, boolean beginner) {
+    public Course(String name, String imageUrl, long categoryId, String overview, long instructorId, int cost, boolean featured, boolean beginner) {
         this.name = name;
         this.imageUrl = imageUrl;
         this.categoryId = categoryId;
         this.overview = overview;
-        this.subcategoryId = subcategoryId;
         this.instructorId = instructorId;
         this.cost = cost;
         this.featured = featured;

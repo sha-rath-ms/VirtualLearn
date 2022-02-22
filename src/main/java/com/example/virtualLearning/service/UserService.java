@@ -113,4 +113,15 @@ public class UserService {
         newUser.setPassword(password);
         userRepository.save(newUser.toUserTable(passwordEncoder));
     }
+
+    public void addAdmin(Users users)
+    {
+        if (userRepository.existsById(users.getMobileNumber())) {
+            log.warn("User is already present with id:{}", users.getMobileNumber());
+            throw new CustomExceptions(ResultInfoConstants.DUPLICATE_USER);
+        }
+        UserTable newUser = users.toUserTable(passwordEncoder);
+        newUser.setRole("ADMIN");
+        userRepository.save(newUser);
+    }
 }

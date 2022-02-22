@@ -23,4 +23,5 @@ public class ResultInfoConstants {
     public static final ResultInfo INVALID_CHAPTER_TEST_ID = new ResultInfo("Invalid Chapter test id");
     public static final ResultInfo NOT_JOINED = new ResultInfo("User not joined the course");
     public static final ResultInfo DUPLICATE_COURSE_ID = new ResultInfo("Course is already present");
+    public static final ResultInfo INVALID_INSTRUCTOR_ID = new ResultInfo("Invalid instructor id");
 }

@@ -47,7 +47,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/virtual-learn/user/**")
                 .permitAll()
-                .antMatchers("/virtual-learn/admin/**")
+                .antMatchers("/virtual-learn/add/**")
                 .hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()

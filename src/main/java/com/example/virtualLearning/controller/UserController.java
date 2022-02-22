@@ -103,4 +103,12 @@ public class UserController {
         userService.changePassword(Long.parseLong(token),password);
         return new ResponseWrapper(ResultInfoConstants.SUCCESS,null);
     }
+
+    @PostMapping("/add-admin")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseWrapper addAdmin(@RequestBody @Valid Users users)
+    {
+        userService.addAdmin(users);
+        return new ResponseWrapper(ResultInfoConstants.SUCCESS,null);
+    }
 }

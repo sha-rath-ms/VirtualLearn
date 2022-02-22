@@ -1,6 +1,7 @@
 package com.example.virtualLearning.service;
 
 import com.example.virtualLearning.constants.Constants;
+import com.example.virtualLearning.entity.Course;
 import com.example.virtualLearning.entity.Instructor;
 import com.example.virtualLearning.exceptions.CustomExceptions;
 import com.example.virtualLearning.repository.*;
@@ -24,8 +25,6 @@ import static com.example.virtualLearning.constants.Constants.*;
 @Service
 @RequiredArgsConstructor
 public class CourseService {
-
-
 
     private final CourseRepository courseRepository;
 

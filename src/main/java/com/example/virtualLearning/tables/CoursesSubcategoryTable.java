@@ -18,4 +18,8 @@ public class CoursesSubcategoryTable {
     @Column(name = "subcategory_id")
     private long subcategoryId;
 
+    public CoursesSubcategoryTable(long courseId, long subcategoryId) {
+        this.courseId = courseId;
+        this.subcategoryId = subcategoryId;
+    }
 }
