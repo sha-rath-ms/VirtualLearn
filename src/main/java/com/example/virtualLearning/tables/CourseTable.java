@@ -13,7 +13,7 @@ import javax.persistence.*;
 
 public class CourseTable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
     @Column(name = "image_url")

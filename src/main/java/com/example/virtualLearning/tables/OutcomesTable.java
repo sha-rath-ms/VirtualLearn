@@ -14,7 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class OutcomesTable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String message;
     @Column(name = "course_id")

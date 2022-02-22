@@ -41,8 +41,7 @@ public class UserController {
     @PostMapping("/send-otp/{mobileNumber}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseWrapper sendOtp(@PathVariable("mobileNumber") Long mobileNumber) {
-        userService.sendOtp(mobileNumber);
-        return new ResponseWrapper(ResultInfoConstants.OTP_SENT,null);
+        return new ResponseWrapper(ResultInfoConstants.OTP_SENT,userService.sendOtp(mobileNumber));
     }
     @PutMapping("/verify-otp")
     @ResponseStatus(HttpStatus.OK)

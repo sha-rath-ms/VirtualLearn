@@ -12,7 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class ChapterTestTable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
     @Column(name = "chapter_id")

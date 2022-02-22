@@ -12,18 +12,15 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class CategoryTable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-
-    public CategoryTable() {
-    }
 
     public CategoryTable(String name) {
         this.name = name;
     }
 
     public Category toCategory() {
-        return new Category(this.name);
+        return new Category(this.id,this.name);
     }
 }

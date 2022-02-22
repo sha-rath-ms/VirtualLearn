@@ -30,14 +30,16 @@ public class UserService {
     private final OtpRepository otpRepository;
     private final BlockListRepository blockListRepository;
 
-    public void sendOtp(Long mobileNumber) {
+    public int sendOtp(Long mobileNumber) {
         validations.validateMobileNumber(mobileNumber);
         try {
             otpRepository.deleteById(mobileNumber);
         } catch (Exception ignored) {
 
         }
-        otpRepository.save(new OtpToken(mobileNumber));
+        OtpToken otpToken = new OtpToken(mobileNumber);
+        otpRepository.save(otpToken);
+        return otpToken.getOtp();
     }
 
     public void verifyOtp(Long mobileNumber, int otp) {
