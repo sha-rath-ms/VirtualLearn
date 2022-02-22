@@ -111,4 +111,12 @@ public class UserController {
         userService.addAdmin(users);
         return new ResponseWrapper(ResultInfoConstants.SUCCESS,null);
     }
+    @PostMapping("/logout")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseWrapper logout(@RequestHeader("Authorization") String headerToken){
+        String token = headerToken.substring(7);
+        userService.logout(token);
+        return new ResponseWrapper(ResultInfoConstants.SUCCESS,null);
+
+    }
 }

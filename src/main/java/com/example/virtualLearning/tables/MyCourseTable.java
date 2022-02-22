@@ -28,7 +28,7 @@ public class MyCourseTable {
         this.courseId=courseId;
     }
 
-    public void setCerticateDetails(){
+    public void setCertificateDetails(){
         if(this.completed){
             //TODO: Generate certificate ID or anything else if required
             this.certificate="You have completed course with id " +this.courseId;

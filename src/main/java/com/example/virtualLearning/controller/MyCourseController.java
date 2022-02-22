@@ -32,7 +32,7 @@ public class MyCourseController {
 
     @GetMapping("/display-all")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseWrapper<List<ResponseAllCourse>> displayAll(@RequestHeader("course-id") Long courseId,@RequestHeader("Authorization") String token,@RequestParam(defaultValue = "0") Integer page) {
+    public ResponseWrapper<List<ResponseAllCourse>> displayAll(@RequestHeader("Authorization") String token,@RequestParam(defaultValue = "0") Integer page) {
         Long userId = Long.parseLong(jwtUtility.getUserId(token));
         return new ResponseWrapper<>(ResultInfoConstants.SUCCESS, myCourseService.getAllMyCourses(userId,page));
     }
@@ -57,6 +57,14 @@ public class MyCourseController {
         Long userId = Long.parseLong(jwtUtility.getUserId(token));
 
         return new ResponseWrapper<>(ResultInfoConstants.SUCCESS, myCourseService.displayCertificate(userId,courseId));
+    }
+
+    @GetMapping("/set-completed")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseWrapper setCompletion(@RequestHeader("course-id") Long courseId,@RequestHeader("Authorization") String token) {
+        Long userId = Long.parseLong(jwtUtility.getUserId(token));
+        myCourseService.updateCompleted(userId,courseId);
+        return new ResponseWrapper(ResultInfoConstants.SUCCESS,null );
     }
 }
 
