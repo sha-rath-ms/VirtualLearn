@@ -54,6 +54,9 @@ public class JwtUtility implements Serializable {
     //check if the token has expired
     private Boolean isTokenExpired(String token) {
         final Date expiration = getExpirationDateFromToken(token);
+        if(blocklistRepository.findById(token)){
+            return true;
+        }
         return expiration.before(new Date());
     }
 

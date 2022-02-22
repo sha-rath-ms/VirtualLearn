@@ -1,6 +1,6 @@
 package com.example.virtualLearning.tables;
 
-import com.example.virtualLearning.response.ResponseAllCourse;
+
 import lombok.*;
 
 import javax.persistence.*;
