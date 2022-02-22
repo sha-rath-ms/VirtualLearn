@@ -1,6 +1,7 @@
 package com.example.virtualLearning.security;
 
 
+import com.example.virtualLearning.repository.BlockListRepository;
 import com.example.virtualLearning.tables.UserTable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,7 +14,6 @@ import java.util.Collections;
 public class CustomUserDetails implements UserDetails {
 
     private final UserTable user;
-
     public CustomUserDetails(UserTable user) {
         super();
         this.user = user;

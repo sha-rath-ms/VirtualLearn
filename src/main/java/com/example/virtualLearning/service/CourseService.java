@@ -73,7 +73,7 @@ public class CourseService {
     public List<ResponseAllCourse> search(String courseName, Long categoryId, int pageNo) {
         Pageable paging = PageRequest.of(pageNo,pageLimit);
         Page<CourseTable> pagedResult;
-        if(categoryId != null) {
+        if(categoryId != -1) {
            pagedResult = courseRepository.searchInCategory(courseName, categoryId, paging);
         }
         else

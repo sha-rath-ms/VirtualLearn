@@ -2,6 +2,9 @@ package com.example.virtualLearning.security;
 
 
 
+import com.example.virtualLearning.repository.BlockListRepository;
+import com.example.virtualLearning.tables.BlockListTable;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,8 +19,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
+import java.util.List;
 
 @Component
+@Slf4j
 public class JwtFilter extends OncePerRequestFilter {
 
     @Autowired
@@ -25,6 +31,8 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Autowired
     private UserDetailsService userService;
+
+
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
@@ -42,6 +50,7 @@ public class JwtFilter extends OncePerRequestFilter {
                     = userService.loadUserByUsername(userName);
 
             if (jwtUtility.validateToken(token, userDetails)) {
+
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
                         = new UsernamePasswordAuthenticationToken(userDetails,
                         null, userDetails.getAuthorities());
@@ -56,5 +65,8 @@ public class JwtFilter extends OncePerRequestFilter {
         }
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
+
+
+
 }
 

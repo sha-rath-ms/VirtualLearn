@@ -16,7 +16,7 @@ public interface CourseRepository extends JpaRepository<CourseTable, Long> {
     @Query(value = "select * from course_tbl c where c.category_id = :categoryId", nativeQuery = true)
     Page<CourseTable> getAllCourseByCategoryId(long categoryId, Pageable pageable);
 
-    @Query(value = "select * from course_tbl c where c.course_id = :courseId", nativeQuery = true)
+    @Query(value = "select * from course_tbl c where c.id = ?1", nativeQuery = true)
     Optional<CourseTable> getById(long courseId);
 
     @Query(value = "select * from course_tbl c where c.category_id= :categoryId and c.featured=1", nativeQuery = true)
@@ -25,9 +25,9 @@ public interface CourseRepository extends JpaRepository<CourseTable, Long> {
     @Query(value = "select * from course_tbl c where c.category_id= :categoryId and c.beginner=1", nativeQuery = true)
     List<CourseTable> getBeginnerCourses(Long categoryId);
 
-    @Query(value = "select * from course_tbl c where name LIKE %:courseName% and c.category=:categoryId", nativeQuery = true)
+    @Query(value = "select * from course_tbl c where c.name LIKE %:courseName% and c.category_id=:categoryId", nativeQuery = true)
     Page<CourseTable> searchInCategory(String courseName,long categoryId , Pageable pageable);
 
-    @Query(value = "select * from course_tbl c where name LIKE %:courseName% ", nativeQuery = true)
+    @Query(value = "select * from course_tbl c where c.name LIKE %:courseName% ", nativeQuery = true)
     Page<CourseTable> search(String courseName, Pageable pageable);
 }

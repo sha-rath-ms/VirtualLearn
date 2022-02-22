@@ -3,9 +3,11 @@ package com.example.virtualLearning.service;
 import com.example.virtualLearning.entity.OtpToken;
 import com.example.virtualLearning.entity.Users;
 import com.example.virtualLearning.exceptions.CustomExceptions;
+import com.example.virtualLearning.repository.BlockListRepository;
 import com.example.virtualLearning.repository.OtpRepository;
 import com.example.virtualLearning.repository.UserRepository;
 import com.example.virtualLearning.response.ResultInfoConstants;
+import com.example.virtualLearning.tables.BlockListTable;
 import com.example.virtualLearning.tables.UserTable;
 import com.example.virtualLearning.validations.Validations;
 import lombok.Data;
@@ -26,6 +28,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final OtpRepository otpRepository;
+    private final BlockListRepository blockListRepository;
 
     public void sendOtp(Long mobileNumber) {
         validations.validateMobileNumber(mobileNumber);
@@ -121,5 +124,9 @@ public class UserService {
         UserTable newUser = users.toUserTable(passwordEncoder);
         newUser.setRole("ADMIN");
         userRepository.save(newUser);
+    }
+
+    public void logout(String token){
+         blockListRepository.save(new BlockListTable(token));
     }
 }

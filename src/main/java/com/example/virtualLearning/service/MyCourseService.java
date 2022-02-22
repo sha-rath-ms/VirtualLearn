@@ -1,9 +1,11 @@
 package com.example.virtualLearning.service;
 
 import com.example.virtualLearning.constants.Constants;
+import com.example.virtualLearning.exceptions.CustomExceptions;
 import com.example.virtualLearning.repository.CourseRepository;
 import com.example.virtualLearning.repository.MyCourseRepository;
 import com.example.virtualLearning.response.ResponseAllCourse;
+import com.example.virtualLearning.response.ResultInfoConstants;
 import com.example.virtualLearning.tables.MyCourseTable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -25,6 +27,9 @@ public class MyCourseService {
     }
 
     public void addCourse(Long mobileNumber,Long courseId){
+            if(!courseRepository.existsById(courseId)){
+                throw new CustomExceptions(ResultInfoConstants.INVALID_COURSE_ID);
+            }
             myCourseRepository.save(new MyCourseTable(mobileNumber,courseId));
     }
 
@@ -39,21 +44,32 @@ public class MyCourseService {
     }
 
     public boolean checkIfCourseExists(Long mobileNumber,Long courseId){
-        return myCourseRepository.existsByMobileNumberAndCourseId(mobileNumber, courseId).isPresent();
+        return myCourseRepository.existsByMobileNumberAndCourseId(mobileNumber,courseId);
     }
 
     public List<ResponseAllCourse>  displayCompletedCourses(Long mobileNumber,Integer page){
         return getListFromId(myCourseRepository.findAllCompleted(mobileNumber,PageRequest.of(page,Constants.pageLimit)));
     }
     public String displayCertificate(Long mobileNumber,Long courseId){
+        if(!courseRepository.existsById(courseId)){
+            throw new CustomExceptions(ResultInfoConstants.INVALID_COURSE_ID);
+        }
+        if(!myCourseRepository.findByMobilenumberAndCourseId(mobileNumber,courseId).isCompleted()){
+            throw  new CustomExceptions(ResultInfoConstants.COURSE_NOT_COMPLETE);
+        }
         return myCourseRepository.getCertificate(mobileNumber,courseId);
     }
     public List<ResponseAllCourse>  displayOngoingCourses(Long mobileNumber,Integer page){
         return getListFromId(myCourseRepository.findAllOngoing(mobileNumber,PageRequest.of(page,Constants.pageLimit)));
     }
     public void updateCompleted(Long courseId,Long mobileNumber){
-        //Set completed equal 1 one;
-        //set certificate
+        if(!myCourseRepository.existsByMobileNumberAndCourseId(mobileNumber,courseId)){
+            throw new CustomExceptions(ResultInfoConstants.INVALID_COURSE_ID);
+        }
+        MyCourseTable course = myCourseRepository.findByMobilenumberAndCourseId(mobileNumber,courseId);
+        course.setCompleted(true);
+        course.setCertificateDetails();
+        myCourseRepository.save(course);
     }
 
 }

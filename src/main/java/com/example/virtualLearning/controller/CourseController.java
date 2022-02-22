@@ -38,7 +38,7 @@ public class CourseController {
 
     @GetMapping("/search")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseWrapper<ResponseAllCourse> search(@RequestParam(defaultValue = "0") Integer pageNo,@RequestParam(defaultValue = "null") Long categoryId,@RequestBody String courseName)
+    public ResponseWrapper<ResponseAllCourse> search(@RequestParam(defaultValue = "0") Integer pageNo,@RequestParam(defaultValue = "-1") Long categoryId,@RequestBody String courseName)
     {
         return new ResponseWrapper(ResultInfoConstants.SUCCESS,courseService.search(courseName,categoryId,pageNo));
     }

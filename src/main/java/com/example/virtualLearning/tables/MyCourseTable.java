@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Setter
 public class MyCourseTable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(name = "mobile_number")
     private Long mobileNumber;
@@ -26,9 +26,13 @@ public class MyCourseTable {
     public MyCourseTable(Long mobileNumber,Long courseId){
         this.mobileNumber=mobileNumber;
         this.courseId=courseId;
+        this.completed=false;
+        this.certificate=null;
+        this.notes=null;
+
     }
 
-    public void setCerticateDetails(){
+    public void setCertificateDetails(){
         if(this.completed){
             //TODO: Generate certificate ID or anything else if required
             this.certificate="You have completed course with id " +this.courseId;
