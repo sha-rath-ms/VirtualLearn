@@ -8,10 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
 public interface AdsRepository extends JpaRepository<AdsTable,Long> {
-    @Query(value = "select * from course_tbl c,ads_tbl a where c.id = a.courseId",nativeQuery = true)
+    @Query(value = "select * from course_tbl c,ads_tbl a where c.id = a.course_id", nativeQuery = true)
     Page<CourseTable> getAllAds(Pageable pageable);
 }

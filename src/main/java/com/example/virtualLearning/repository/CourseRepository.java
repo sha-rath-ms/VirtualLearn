@@ -25,4 +25,9 @@ public interface CourseRepository extends JpaRepository<CourseTable, Long> {
     @Query(value = "select * from course_tbl c where c.category_id= :categoryId and c.beginner=1", nativeQuery = true)
     List<CourseTable> getBeginnerCourses(Long categoryId);
 
+    @Query(value = "select * from course_tbl c where name LIKE %:courseName% and c.category=:categoryId", nativeQuery = true)
+    Page<CourseTable> searchInCategory(String courseName,long categoryId , Pageable pageable);
+
+    @Query(value = "select * from course_tbl c where name LIKE %:courseName% ", nativeQuery = true)
+    Page<CourseTable> search(String courseName, Pageable pageable);
 }

@@ -3,9 +3,7 @@ package com.example.virtualLearning.tables;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -13,9 +11,13 @@ import javax.persistence.Table;
 @AllArgsConstructor
 public class ResultTable {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    @Column(name = "user_id")
     private long userId;
+    @Column(name = "course_id")
     private long courseId;
+    @Column(name = "chapter_id")
     private long chapterId;
     private int result;
 

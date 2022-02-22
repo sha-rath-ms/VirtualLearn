@@ -21,18 +21,25 @@ public class CourseController {
     @GetMapping("/category/{categoryId}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseWrapper<List<ResponseAllCourse>> getAllByCategory(@RequestParam(defaultValue = "0") Integer pageNo, @PathVariable long categoryId) {
-        return new ResponseWrapper<>(ResultInfoConstants.SUCCESS, courseService.getAll(pageNo, categoryId));
+        return new ResponseWrapper<>(ResultInfoConstants.SUCCESS, courseService.getAllByCategory(pageNo, categoryId));
     }
 
-//    @GetMapping()
-//    @ResponseStatus(HttpStatus.OK)
-//    public ResponseWrapper getAll(@RequestParam(defaultValue = "0") Integer pageNo) {
-//        return new ResponseWrapper(ResultInfoConstants.SUCCESS, courseService.getAll(pageNo));
-//    }
+    @GetMapping("/all")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseWrapper getAll(@RequestParam(defaultValue = "0") Integer pageNo) {
+        return new ResponseWrapper(ResultInfoConstants.SUCCESS, courseService.getAll(pageNo));
+    }
 
     @GetMapping("/{courseId}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseWrapper<ResponseCourseDetails> getByCourseById(@PathVariable long courseId) {
         return new ResponseWrapper<>(ResultInfoConstants.SUCCESS, courseService.getById(courseId));
+    }
+
+    @GetMapping("/search")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseWrapper<ResponseAllCourse> search(@RequestParam(defaultValue = "0") Integer pageNo,@RequestParam(defaultValue = "null") Long categoryId,@RequestBody String courseName)
+    {
+        return new ResponseWrapper(ResultInfoConstants.SUCCESS,courseService.search(courseName,categoryId,pageNo));
     }
 }

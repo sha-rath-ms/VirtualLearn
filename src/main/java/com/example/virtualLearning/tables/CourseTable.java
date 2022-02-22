@@ -4,9 +4,7 @@ import com.example.virtualLearning.response.ResponseAllCourse;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -15,11 +13,15 @@ import javax.persistence.Table;
 
 public class CourseTable {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
+    @Column(name = "image_url")
     private String imageUrl;
+    @Column(name = "category_id")
     private long categoryId;
     private String overview;
+    @Column(name = "instructor_id")
     private long instructorId;
     private int cost;
     private boolean featured;
@@ -39,7 +41,4 @@ public class CourseTable {
     public ResponseAllCourse responseAllCourse() {
         return new ResponseAllCourse(this.id, this.name, this.imageUrl);
     }
-
-
-
 }

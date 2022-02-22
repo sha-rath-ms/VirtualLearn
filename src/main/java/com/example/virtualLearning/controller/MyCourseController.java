@@ -17,7 +17,9 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/virtual-learn/my-course")
 public class MyCourseController {
+
     private final MyCourseService myCourseService;
+
     private final JwtUtility jwtUtility;
 
     @PostMapping("/add")
@@ -27,28 +29,28 @@ public class MyCourseController {
         myCourseService.addCourse(userId,courseId);
         return new ResponseWrapper<String>(ResultInfoConstants.SUCCESS, null);
     }
+
     @GetMapping("/display-all")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseWrapper<List<ResponseAllCourse>> displayAll(@RequestHeader("course-id") Long courseId,@RequestHeader("Authorization") String token,@RequestHeader("page") Integer page) {
+    public ResponseWrapper<List<ResponseAllCourse>> displayAll(@RequestHeader("course-id") Long courseId,@RequestHeader("Authorization") String token,@RequestParam(defaultValue = "0") Integer page) {
         Long userId = Long.parseLong(jwtUtility.getUserId(token));
-
         return new ResponseWrapper<>(ResultInfoConstants.SUCCESS, myCourseService.getAllMyCourses(userId,page));
     }
+
     @GetMapping("/display-completed")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseWrapper<List<ResponseAllCourse>> displayCompleted(@RequestHeader("course-id") Long courseId, @RequestHeader("Authorization") String token, @RequestHeader("page") Integer page) {
+    public ResponseWrapper<List<ResponseAllCourse>> displayCompleted(@RequestHeader("course-id") Long courseId, @RequestHeader("Authorization") String token, @RequestParam(defaultValue = "0") Integer page) {
         Long userId = Long.parseLong(jwtUtility.getUserId(token));
-        page= page==null?0:page;
         return new ResponseWrapper<>(ResultInfoConstants.SUCCESS,   myCourseService.displayCompletedCourses(userId,page));
     }
+
     @GetMapping("/display-ongoing")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseWrapper<List<ResponseAllCourse>> displayOngoing(@RequestHeader("course-id") Long courseId, @RequestHeader("Authorization") String token, @RequestHeader("page") Integer page) {
+    public ResponseWrapper<List<ResponseAllCourse>> displayOngoing(@RequestHeader("course-id") Long courseId, @RequestHeader("Authorization") String token, @RequestParam(defaultValue = "0") Integer page) {
         Long userId = Long.parseLong(jwtUtility.getUserId(token));
-        page= page==null?0:page;
-
         return new ResponseWrapper<>(ResultInfoConstants.SUCCESS, myCourseService.displayOngoingCourses(userId,page));
     }
+
     @GetMapping("/display-certificate")
     @ResponseStatus(HttpStatus.OK)
     public ResponseWrapper<String> displayCertificate(@RequestHeader("course-id") Long courseId,@RequestHeader("Authorization") String token) {
@@ -56,7 +58,5 @@ public class MyCourseController {
 
         return new ResponseWrapper<>(ResultInfoConstants.SUCCESS, myCourseService.displayCertificate(userId,courseId));
     }
-
-    //TODO Update mycourse request
 }
 

@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface ChapterRepository extends JpaRepository<ChapterTable, Long> {
 
-    @Query(value = "select * from chapter_tbl c where c.courseId = :courseId", nativeQuery = true)
+    @Query(value = "select * from chapter_tbl c where c.course_idd = :courseId", nativeQuery = true)
     List<ChapterTable> getAll(long courseId);
 }

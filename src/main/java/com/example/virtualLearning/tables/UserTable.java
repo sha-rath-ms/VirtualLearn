@@ -25,7 +25,9 @@ public class UserTable {
     private String occupation;
     private String gender;
     private String dob;
+    @Column(name = "twitter_link")
     private String twitterLink;
+    @Column(name = "facebook_link")
     private String facebookLink;
     private String role;
 

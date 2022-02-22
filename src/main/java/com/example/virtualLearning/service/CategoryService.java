@@ -6,11 +6,13 @@ import com.example.virtualLearning.entity.Subcategory;
 import com.example.virtualLearning.exceptions.CustomExceptions;
 import com.example.virtualLearning.repository.CategoryRepository;
 import com.example.virtualLearning.repository.CourseRepository;
+import com.example.virtualLearning.repository.CourseSubcategoryRepository;
 import com.example.virtualLearning.repository.SubcategoryRepository;
 import com.example.virtualLearning.response.ResponseAllCourse;
 import com.example.virtualLearning.response.ResultInfoConstants;
 import com.example.virtualLearning.tables.CategoryTable;
 import com.example.virtualLearning.tables.CourseTable;
+import com.example.virtualLearning.tables.MyCourseTable;
 import com.example.virtualLearning.tables.SubcategoryTable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -18,6 +20,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,6 +34,7 @@ public class CategoryService {
     private final CategoryRepository categoryRepository;
     private final CourseRepository courseRepository;
     private final SubcategoryRepository subCategoryRepository;
+    private final CourseSubcategoryRepository courseSubcategoryRepository;
 
 
     public List<Category> getAll() {
@@ -72,20 +76,20 @@ public class CategoryService {
         return subCategoryRepository.findByCategoryId(categoryId).stream().map(SubcategoryTable::toSubcategory).collect(Collectors.toList());
     }
 
-    public List<ResponseAllCourse> getAllCourses(int pageNo,Long categoryId) {
-        if(!categoryRepository.findById(categoryId).isPresent())
+    public List<ResponseAllCourse> getBySubcategory(Long subcategoryId)
+    {
+        if(!subCategoryRepository.findById(subcategoryId).isPresent())
         {
-            throw new CustomExceptions(ResultInfoConstants.INVALID_CATEGORY_ID);
+            throw new CustomExceptions(ResultInfoConstants.INVALID_SUBCATEGORY_ID);
         }
-        return courseRepository.getAllCourseByCategoryId(categoryId, PageRequest.of(pageNo, PAGE_LIMIT)).toList().stream().map(CourseTable::responseAllCourse).collect(Collectors.toList());
+        return getListFromId(courseSubcategoryRepository.getCourse(subcategoryId));
     }
 
-    public List<ResponseAllCourse> getAllCourses(Long categoryId, Integer page) {
-        if(!categoryRepository.findById(categoryId).isPresent())
-        {
-            throw new CustomExceptions(ResultInfoConstants.INVALID_CATEGORY_ID);
+    private List<ResponseAllCourse> getListFromId(List<Long> gotCourse) {
+        List<ResponseAllCourse> courseTables =new ArrayList<ResponseAllCourse>();
+        for (Long aLong : gotCourse) {
+            courseTables.add(courseRepository.getById(aLong).responseAllCourse());
         }
-        return courseRepository.getAllCourseByCategoryId(categoryId, PageRequest.of(page, PAGE_LIMIT)).stream().map(CourseTable::responseAllCourse).collect(Collectors.toList());
+        return courseTables;
     }
-
 }

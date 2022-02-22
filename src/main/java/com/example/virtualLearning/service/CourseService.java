@@ -1,12 +1,10 @@
 package com.example.virtualLearning.service;
 
 import com.example.virtualLearning.constants.Constants;
+import com.example.virtualLearning.entity.Course;
 import com.example.virtualLearning.entity.Instructor;
 import com.example.virtualLearning.exceptions.CustomExceptions;
-import com.example.virtualLearning.repository.BenefitsRepository;
-import com.example.virtualLearning.repository.CourseRepository;
-import com.example.virtualLearning.repository.InstructorRepository;
-import com.example.virtualLearning.repository.OutcomeRepository;
+import com.example.virtualLearning.repository.*;
 import com.example.virtualLearning.response.ResponseAllCourse;
 import com.example.virtualLearning.response.ResponseCourseDetails;
 import com.example.virtualLearning.response.ResultInfoConstants;
@@ -22,11 +20,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static com.example.virtualLearning.constants.Constants.*;
+
 @Service
 @RequiredArgsConstructor
 public class CourseService {
-
-
 
     private final CourseRepository courseRepository;
 
@@ -34,11 +32,27 @@ public class CourseService {
 
     private final OutcomeRepository outcomeRepository;
 
+    private final CategoryRepository categoryRepository;
+
     private final InstructorRepository instructorRepository;
 
-    public List<ResponseAllCourse> getAll(int pageNo, long categoryId) {
-        Pageable paging = (Pageable) PageRequest.of(pageNo, Constants.pageLimit);
+    public List<ResponseAllCourse> getAllByCategory(int pageNo, long categoryId) {
+        if(!categoryRepository.findById(categoryId).isPresent())
+        {
+            throw new CustomExceptions(ResultInfoConstants.INVALID_CATEGORY_ID);
+        }
+        Pageable paging = (Pageable) PageRequest.of(pageNo, pageLimit);
         Page<CourseTable> pagedResult = courseRepository.getAllCourseByCategoryId(categoryId, paging);
+        if (!pagedResult.hasContent()) {
+            return Collections.emptyList();
+        }
+        return pagedResult.getContent().stream().map(CourseTable::responseAllCourse).collect(Collectors.toList());
+    }
+
+    public List<ResponseAllCourse> getAll(int pageNo)
+    {
+        Pageable paging = (Pageable) PageRequest.of(pageNo, pageLimit);
+        Page<CourseTable> pagedResult = courseRepository.findAll(paging);
         if (!pagedResult.hasContent()) {
             return Collections.emptyList();
         }
@@ -54,5 +68,21 @@ public class CourseService {
         List<String> outcomes = outcomeRepository.getAll(courseId);
         Instructor instructor = instructorRepository.findById(courseTable.get().getInstructorId()).get().toInstructor();
         return new ResponseCourseDetails(courseTable.get(), benefits, outcomes, instructor);
+    }
+
+    public List<ResponseAllCourse> search(String courseName, Long categoryId, int pageNo) {
+        Pageable paging = PageRequest.of(pageNo,pageLimit);
+        Page<CourseTable> pagedResult;
+        if(categoryId != null) {
+           pagedResult = courseRepository.searchInCategory(courseName, categoryId, paging);
+        }
+        else
+        {
+            pagedResult = courseRepository.search(courseName, paging);
+        }
+        if (!pagedResult.hasContent()) {
+            return Collections.emptyList();
+        }
+        return pagedResult.getContent().stream().map(CourseTable::responseAllCourse).collect(Collectors.toList());
     }
 }

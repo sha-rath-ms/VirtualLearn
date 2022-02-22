@@ -4,9 +4,7 @@ import com.example.virtualLearning.entity.Subcategory;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -14,11 +12,13 @@ import javax.persistence.Table;
 @NoArgsConstructor
 public class SubcategoryTable {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
-    private String categoryId;
+    @Column(name = "category_id")
+    private long categoryId;
 
-    public SubcategoryTable(String name, String categoryId) {
+    public SubcategoryTable(String name, long categoryId) {
         this.name = name;
         this.categoryId = categoryId;
     }

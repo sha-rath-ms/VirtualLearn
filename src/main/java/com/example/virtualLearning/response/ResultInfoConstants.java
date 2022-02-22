@@ -17,9 +17,11 @@ public class ResultInfoConstants {
     public static final ResultInfo INVALID_ID = new ResultInfo("Invalid id");
     public static final ResultInfo DUPLICATE_SUBCATEGORY = new ResultInfo("SubCategory is already present, enter new subcategory");
     public static final ResultInfo INVALID_CATEGORY_ID = new ResultInfo("Invalid Category id");
+    public static final ResultInfo INVALID_SUBCATEGORY_ID = new ResultInfo("Invalid Subcategory id");
     public static final ResultInfo INVALID_COURSE_ID = new ResultInfo("Invalid Course id");
     public static final ResultInfo INVALID_CHAPTER_ID = new ResultInfo("Invalid Chapter id");
     public static final ResultInfo INVALID_CHAPTER_TEST_ID = new ResultInfo("Invalid Chapter test id");
     public static final ResultInfo NOT_JOINED = new ResultInfo("User not joined the course");
     public static final ResultInfo DUPLICATE_COURSE_ID = new ResultInfo("Course is already present");
+    public static final ResultInfo INVALID_INSTRUCTOR_ID = new ResultInfo("Invalid instructor id");
 }
