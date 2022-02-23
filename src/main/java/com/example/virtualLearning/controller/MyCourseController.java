@@ -58,7 +58,7 @@ public class MyCourseController {
 
         return new ResponseWrapper<>(ResultInfoConstants.SUCCESS, myCourseService.displayCertificate(userId,courseId));
     }
-
+    //
     @GetMapping("/set-completed")
     @ResponseStatus(HttpStatus.OK)
     public ResponseWrapper setCompletion(@RequestHeader("course-id") Long courseId,@RequestHeader("Authorization") String token) {
