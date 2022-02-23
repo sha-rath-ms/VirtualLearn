@@ -26,7 +26,7 @@ public class QuizController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseWrapper getTest(@RequestHeader("Authorization") String token,@RequestHeader("course-id") long courseId,@RequestHeader("chapter-test-id") long chapterTestId)
     {
-        if(myCourseService.checkIfCourseExists(Long.parseLong(jwtUtility.getUserId(token)), courseId))
+        if(!myCourseService.checkIfCourseExists(Long.parseLong(jwtUtility.getUserId(token)), courseId))
         {
             throw new CustomExceptions(ResultInfoConstants.NOT_JOINED);
         }

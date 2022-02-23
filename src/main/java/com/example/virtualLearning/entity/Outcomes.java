@@ -3,9 +3,11 @@ package com.example.virtualLearning.entity;
 import com.example.virtualLearning.tables.OutcomesTable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Outcomes {
 
     private long id;

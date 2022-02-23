@@ -5,14 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
 public class Instructor {
     private long id;
     private String name;
     private String imageUrl;
     private String about;
 
-    public Instructor(String name, String imageUrl, String about) {
+    public Instructor(long id,String name, String imageUrl, String about) {
+        this.id=id;
         this.name = name;
         this.imageUrl = imageUrl;
         this.about = about;

@@ -2,8 +2,10 @@ package com.example.virtualLearning.entity;
 
 import com.example.virtualLearning.tables.SubcategoryTable;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class Subcategory {
     private long id;
     private String name;

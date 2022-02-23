@@ -3,6 +3,7 @@ package com.example.virtualLearning.tables;
 import com.example.virtualLearning.entity.Content;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "content_tbl")
 @AllArgsConstructor
+@NoArgsConstructor
 public class ContentTable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

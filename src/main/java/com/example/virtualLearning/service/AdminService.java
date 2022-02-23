@@ -144,4 +144,5 @@ public class AdminService {
         }
         adsRepository.save(new AdsTable(courseId));
     }
+
 }

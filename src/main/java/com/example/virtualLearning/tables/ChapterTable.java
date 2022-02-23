@@ -3,13 +3,14 @@ package com.example.virtualLearning.tables;
 import com.example.virtualLearning.entity.Chapter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
 @Entity
 @Table(name = "chapter_tbl")
-@AllArgsConstructor
+@NoArgsConstructor
 public class ChapterTable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

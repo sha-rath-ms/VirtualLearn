@@ -4,6 +4,7 @@ import com.example.virtualLearning.entity.QuestionAndAnswers;
 import com.example.virtualLearning.extract.ConvertOptions;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "quiz_tbl")
 @AllArgsConstructor
+@NoArgsConstructor
 public class QuestionAndAnswersTable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

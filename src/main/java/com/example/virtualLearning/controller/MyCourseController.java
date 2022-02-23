@@ -39,14 +39,14 @@ public class MyCourseController {
 
     @GetMapping("/display-completed")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseWrapper<List<ResponseAllCourse>> displayCompleted(@RequestHeader("course-id") Long courseId, @RequestHeader("Authorization") String token, @RequestParam(defaultValue = "0") Integer page) {
+    public ResponseWrapper<List<ResponseAllCourse>> displayCompleted(@RequestHeader("Authorization") String token, @RequestParam(defaultValue = "0") Integer page) {
         Long userId = Long.parseLong(jwtUtility.getUserId(token));
         return new ResponseWrapper<>(ResultInfoConstants.SUCCESS,   myCourseService.displayCompletedCourses(userId,page));
     }
 
     @GetMapping("/display-ongoing")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseWrapper<List<ResponseAllCourse>> displayOngoing(@RequestHeader("course-id") Long courseId, @RequestHeader("Authorization") String token, @RequestParam(defaultValue = "0") Integer page) {
+    public ResponseWrapper<List<ResponseAllCourse>> displayOngoing(@RequestHeader("Authorization") String token, @RequestParam(defaultValue = "0") Integer page) {
         Long userId = Long.parseLong(jwtUtility.getUserId(token));
         return new ResponseWrapper<>(ResultInfoConstants.SUCCESS, myCourseService.displayOngoingCourses(userId,page));
     }

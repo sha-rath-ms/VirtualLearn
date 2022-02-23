@@ -4,10 +4,14 @@ import com.example.virtualLearning.entity.*;
 import com.example.virtualLearning.response.ResponseWrapper;
 import com.example.virtualLearning.response.ResultInfoConstants;
 import com.example.virtualLearning.service.AdminService;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
@@ -85,6 +89,20 @@ public class AdminController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseWrapper addAds(@RequestHeader("course-id") long courseId) {
         adminService.insertAds(courseId);
+        return new ResponseWrapper(ResultInfoConstants.SUCCESS, null);
+    }
+
+    @PostMapping("/subcategory")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseWrapper addSub(@RequestBody @Valid Subcategory subcategory) {
+        adminService.insertSub(subcategory);
+        return new ResponseWrapper(ResultInfoConstants.SUCCESS, null);
+    }
+
+    @PostMapping("/quizQues")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseWrapper addQna(@RequestBody @Valid QuestionAndAnswers questionAndAnswers) {
+        adminService.insertQNA(questionAndAnswers);
         return new ResponseWrapper(ResultInfoConstants.SUCCESS, null);
     }
 }

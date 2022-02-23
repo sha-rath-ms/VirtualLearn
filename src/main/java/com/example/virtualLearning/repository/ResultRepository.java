@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface ResultRepository extends JpaRepository<ResultTable,Long> {
 
     @Query(value = "select * from result_tbl r where r.chapter_id = :chapterId and r.user_id = :userId and r.course_id = :courseId", nativeQuery = true)
-    public int getResult(long userId,long courseId,long chapterId);
+    ResultTable getResult(long userId,long courseId,long chapterId);
 }

@@ -3,11 +3,13 @@ package com.example.virtualLearning.entity;
 import com.example.virtualLearning.tables.CategoryTable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Category {
-    private long id;
+    private Long id;
     private String name;
 
 //    public Category(String name) {

@@ -2,6 +2,7 @@ package com.example.virtualLearning.tables;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -9,6 +10,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "result_tbl")
 @AllArgsConstructor
+@NoArgsConstructor
 public class ResultTable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

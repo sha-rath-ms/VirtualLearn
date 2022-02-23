@@ -3,13 +3,14 @@ package com.example.virtualLearning.tables;
 import com.example.virtualLearning.entity.Category;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
 @Entity
 @Table(name = "category_tbl")
-@AllArgsConstructor
+@NoArgsConstructor
 public class CategoryTable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

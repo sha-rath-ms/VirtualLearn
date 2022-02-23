@@ -20,7 +20,7 @@ public class ResultService {
 
     public void save(long userId,long courseId,long chapterId,int result)
     {
-        if(myCourseService.checkIfCourseExists(userId, courseId))
+        if(!myCourseService.checkIfCourseExists(userId, courseId))
         {
             throw new CustomExceptions(ResultInfoConstants.NOT_JOINED);
         }
@@ -33,7 +33,7 @@ public class ResultService {
 
     public int getResult(long userId,long courseId,long chapterId)
     {
-        if(myCourseService.checkIfCourseExists(userId, courseId))
+        if(!myCourseService.checkIfCourseExists(userId, courseId))
         {
             throw new CustomExceptions(ResultInfoConstants.NOT_JOINED);
         }
@@ -41,6 +41,6 @@ public class ResultService {
         {
             throw new CustomExceptions(ResultInfoConstants.INVALID_CHAPTER_ID);
         }
-        return resultRepository.getResult(userId,courseId,chapterId);
+        return resultRepository.getResult(userId,courseId,chapterId).getResult();
     }
 }

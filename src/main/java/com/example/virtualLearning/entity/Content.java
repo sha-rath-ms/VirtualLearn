@@ -2,12 +2,19 @@ package com.example.virtualLearning.entity;
 
 import com.example.virtualLearning.tables.ContentTable;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.validation.constraints.NotNull;
 
 @Data
+@NoArgsConstructor
 public class Content {
     private long id;
+    @NotNull
     private String name;
+    @NotNull
     private String contentUrl;
+    @NotNull
     private long chapterId;
 
     public Content(long id, String name, String contentUrl, long chapterId) {

@@ -44,7 +44,7 @@ public class MyCourseService {
     }
 
     public boolean checkIfCourseExists(Long mobileNumber,Long courseId){
-        return myCourseRepository.existsByMobileNumberAndCourseId(mobileNumber,courseId);
+        return myCourseRepository.existsByMobileNumberAndCourseId(mobileNumber,courseId).isPresent();
     }
 
     public List<ResponseAllCourse>  displayCompletedCourses(Long mobileNumber,Integer page){
@@ -63,7 +63,7 @@ public class MyCourseService {
         return getListFromId(myCourseRepository.findAllOngoing(mobileNumber,PageRequest.of(page,Constants.pageLimit)));
     }
     public void updateCompleted(Long courseId,Long mobileNumber){
-        if(!myCourseRepository.existsByMobileNumberAndCourseId(mobileNumber,courseId)){
+        if(!myCourseRepository.existsByMobileNumberAndCourseId(mobileNumber,courseId).isPresent()){
             throw new CustomExceptions(ResultInfoConstants.INVALID_COURSE_ID);
         }
         MyCourseTable course = myCourseRepository.findByMobilenumberAndCourseId(mobileNumber,courseId);
