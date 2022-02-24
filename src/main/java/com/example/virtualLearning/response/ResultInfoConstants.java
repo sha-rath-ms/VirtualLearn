@@ -25,4 +25,6 @@ public class ResultInfoConstants {
     public static final ResultInfo DUPLICATE_COURSE_ID = new ResultInfo("Course is already present");
     public static final ResultInfo INVALID_INSTRUCTOR_ID = new ResultInfo("Invalid instructor id");
     public static final ResultInfo COURSE_NOT_COMPLETE = new ResultInfo("Course not complete");
+    public static final ResultInfo INVALID_COURSE_TYPE = new ResultInfo("Course must be featured,beginner or both");
+
 }
