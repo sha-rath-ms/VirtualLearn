@@ -10,4 +10,7 @@ public interface ChapterTestRepository extends JpaRepository<ChapterTestTable, L
 
     @Query(value = "select * from chapter_test_tbl c where c.chapter_id = :chapterId", nativeQuery = true)
     ChapterTestTable getByChapter(long chapterId);
+
+    @Query(value = "select count(*) from chapter_test_tbl c where c.course_id = :courseId", nativeQuery = true)
+    Integer getCountOfChapter(long courseId);
 }

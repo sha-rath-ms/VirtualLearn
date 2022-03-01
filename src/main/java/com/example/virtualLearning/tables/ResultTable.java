@@ -21,12 +21,15 @@ public class ResultTable {
     private long courseId;
     @Column(name = "chapter_id")
     private long chapterId;
+    @Column(name = "chapter_test_id")
+    private long chapterTestId;
     private int result;
 
-    public ResultTable(long userId, long courseId, long chapterId, int result) {
+    public ResultTable(long userId, long courseId, long chapterId, long chapterTestId, int result) {
         this.userId = userId;
         this.courseId = courseId;
         this.chapterId = chapterId;
+        this.chapterTestId = chapterTestId;
         this.result = result;
     }
 }

@@ -12,4 +12,7 @@ public interface ContentRepository extends JpaRepository<ContentTable, Long> {
 
     @Query(value = "select * from content_tbl c where c.chapter_id = :chapterId", nativeQuery = true)
     List<ContentTable> getByChapter(long chapterId);
+
+    @Query(value = "select count(c.id) from content_tbl c where c.course_id = :courseId", nativeQuery = true)
+    Integer getCountOfContents(long courseId);
 }

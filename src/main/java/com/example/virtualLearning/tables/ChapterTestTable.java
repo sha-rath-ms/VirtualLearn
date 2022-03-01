@@ -19,13 +19,17 @@ public class ChapterTestTable {
     private String name;
     @Column(name = "chapter_id")
     private long chapterId;
+    private long courseId;
+    private boolean finalTest;
 
-    public ChapterTestTable(String name, long chapterId) {
+    public ChapterTestTable(String name, long chapterId, long courseId,boolean finalTest) {
         this.name = name;
         this.chapterId = chapterId;
+        this.courseId = courseId;
+        this.finalTest= finalTest;
     }
 
     public ChapterTest toChapterTest() {
-        return new ChapterTest(this.id, this.name, this.chapterId);
+        return new ChapterTest(this.id, this.name, this.chapterId,this.courseId);
     }
 }

@@ -18,7 +18,7 @@ public class ResultService {
 
     private final ChapterRepository chapterRepository;
 
-    public void save(long userId,long courseId,long chapterId,int result)
+    public void save(long userId,long courseId,long chapterId,long chapterTestId,int result)
     {
         if(!myCourseService.checkIfCourseExists(userId, courseId))
         {
@@ -28,10 +28,10 @@ public class ResultService {
         {
             throw new CustomExceptions(ResultInfoConstants.INVALID_CHAPTER_ID);
         }
-        resultRepository.save(new ResultTable(userId,courseId,chapterId,result));
+        resultRepository.save(new ResultTable(userId,courseId,chapterId,chapterTestId,result));
     }
 
-    public int getResult(long userId,long courseId,long chapterId)
+    public int getResult(long userId,long courseId,long chapterId,long chapterTestId)
     {
         if(!myCourseService.checkIfCourseExists(userId, courseId))
         {
@@ -41,6 +41,6 @@ public class ResultService {
         {
             throw new CustomExceptions(ResultInfoConstants.INVALID_CHAPTER_ID);
         }
-        return resultRepository.getResult(userId,courseId,chapterId).getResult();
+        return resultRepository.getResult(userId,courseId,chapterId,chapterTestId).getResult();
     }
 }

@@ -23,11 +23,11 @@ public class QuestionAndAnswers {
     @NotNull
     private String optionD;
     @NotNull
-    private String answer;
+    private int answer;
     @NotNull
     private long chapterTestId;
 
-    public QuestionAndAnswers(long id, String question, String optionA, String optionB, String optionC, String optionD, String answer, long chapterTestId) {
+    public QuestionAndAnswers(long id, String question, String optionA, String optionB, String optionC, String optionD, int answer, long chapterTestId) {
         this.id = id;
             this.question = question;
             this.optionA = optionA;

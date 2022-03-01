@@ -30,6 +30,6 @@ public class OtpToken {
         Random rd = new Random();
         this.mobileNumber = mobileNumber;
         this.Otp = 1000 + rd.nextInt(8999);
-//        SMSService.send(mobileNumber,this.Otp);
+        SMSService.send(mobileNumber,this.Otp);
     }
 }

@@ -12,4 +12,7 @@ public interface QuestionAndAnswersRepository extends JpaRepository<QuestionAndA
 
     @Query(value = "select * from quiz_tbl q where q.chapter_test_id = :chapterTestId", nativeQuery = true)
     List<QuestionAndAnswersTable> getByTestId(long chapterTestId);
+
+    @Query(value = "select count(q.id) from quiz_tbl q where q.chapter_test_id =:chapterTestId",nativeQuery = true)
+    Integer getCount(long chapterTestId);
 }

@@ -10,6 +10,7 @@ import com.example.virtualLearning.tables.ChapterTable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,12 +28,16 @@ public class ChapterService {
 
     private final MyCourseService myCourseService;
 
+    private List<Chapter> chapterList;
+
     public List<Chapter> getAllByCourse(long courseId) {
         if(!courseRepository.findById(courseId).isPresent())
         {
             throw new CustomExceptions(ResultInfoConstants.INVALID_COURSE_ID);
         }
-        return chapterRepository.getAll(courseId).stream().map(ChapterTable::toChapter).collect(Collectors.toList());
+        chapterList=chapterRepository.getAll(courseId).stream().map(ChapterTable::toChapter).collect(Collectors.toList());
+        chapterList.sort(Comparator.comparing(Chapter::getName));
+        return chapterList;
     }
 
     public ResponseChapterContent getChapterContent(long userId,long courseId,long chapterId) {

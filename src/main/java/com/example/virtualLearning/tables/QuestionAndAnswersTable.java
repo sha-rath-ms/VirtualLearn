@@ -19,11 +19,11 @@ public class QuestionAndAnswersTable {
     private long id;
     private String question;
     private String options;
-    private String answer;
+    private int answer;
     @Column(name = "chapter_test_id")
     private long chapterTestId;
 
-    public QuestionAndAnswersTable(String question, String options, String answer, long chapterTestId) {
+    public QuestionAndAnswersTable(String question, String options, int answer, long chapterTestId) {
         this.question = question;
         this.options = options;
         this.answer = answer;

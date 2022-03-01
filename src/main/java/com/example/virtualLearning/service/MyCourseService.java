@@ -2,15 +2,17 @@ package com.example.virtualLearning.service;
 
 import com.example.virtualLearning.constants.Constants;
 import com.example.virtualLearning.exceptions.CustomExceptions;
-import com.example.virtualLearning.repository.CourseRepository;
-import com.example.virtualLearning.repository.MyCourseRepository;
+import com.example.virtualLearning.repository.*;
+import com.example.virtualLearning.response.GetTimeStamp;
 import com.example.virtualLearning.response.ResponseAllCourse;
 import com.example.virtualLearning.response.ResultInfoConstants;
 import com.example.virtualLearning.tables.MyCourseTable;
+import com.example.virtualLearning.tables.VideoStatusTable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,8 +21,12 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class MyCourseService {
 
-    public final MyCourseRepository myCourseRepository;
-    public final CourseRepository courseRepository;
+    private final MyCourseRepository myCourseRepository;
+    private final CourseRepository courseRepository;
+    private final ChapterRepository chapterRepository;
+    private final ContentRepository contentRepository;
+    private final VideoStatusRepository videoStatusRepository;
+    private final UserRepository userRepository;
 
     public List<ResponseAllCourse> getAllMyCourses(Long mobileNumber, Integer page){
         return getListFromId(myCourseRepository.findAllwithMobileNumber(mobileNumber,PageRequest.of(page,Constants.pageLimit)));
@@ -44,12 +50,17 @@ public class MyCourseService {
     }
 
     public boolean checkIfCourseExists(Long mobileNumber,Long courseId){
+        if(!userRepository.existsById(mobileNumber))
+        {
+            throw new CustomExceptions(ResultInfoConstants.INVALID_USER);
+        }
         return myCourseRepository.existsByMobileNumberAndCourseId(mobileNumber,courseId).isPresent();
     }
 
     public List<ResponseAllCourse>  displayCompletedCourses(Long mobileNumber,Integer page){
         return getListFromId(myCourseRepository.findAllCompleted(mobileNumber,PageRequest.of(page,Constants.pageLimit)));
     }
+
     public String displayCertificate(Long mobileNumber,Long courseId){
         if(!courseRepository.existsById(courseId)){
             throw new CustomExceptions(ResultInfoConstants.INVALID_COURSE_ID);
@@ -59,9 +70,11 @@ public class MyCourseService {
         }
         return myCourseRepository.getCertificate(mobileNumber,courseId);
     }
+
     public List<ResponseAllCourse>  displayOngoingCourses(Long mobileNumber,Integer page){
         return getListFromId(myCourseRepository.findAllOngoing(mobileNumber,PageRequest.of(page,Constants.pageLimit)));
     }
+
     public void updateCompleted(Long courseId,Long mobileNumber){
         if(!myCourseRepository.existsByMobileNumberAndCourseId(mobileNumber,courseId).isPresent()){
             throw new CustomExceptions(ResultInfoConstants.INVALID_COURSE_ID);
@@ -72,4 +85,23 @@ public class MyCourseService {
         myCourseRepository.save(course);
     }
 
+    public void saveStatus(long userId, long courseId, long chapterId, long contentId, GetTimeStamp getTimeStamp)
+    {
+        if(!checkIfCourseExists(userId,courseId)){
+            throw new CustomExceptions(ResultInfoConstants.INVALID_COURSE_ID);
+        }
+        if(!courseRepository.existsById(courseId))
+        {
+            throw new CustomExceptions(ResultInfoConstants.INVALID_COURSE_ID);
+        }
+        if(!chapterRepository.existsById(chapterId))
+        {
+            throw new CustomExceptions(ResultInfoConstants.INVALID_CHAPTER_ID);
+        }
+        if(!contentRepository.existsById(contentId))
+        {
+            throw new CustomExceptions(ResultInfoConstants.INVALID_CONTENT_ID);
+        }
+        videoStatusRepository.save(new VideoStatusTable(userId,courseId,chapterId,contentId, getTimeStamp.getTimestamp(), getTimeStamp.isCompleted()));
+    }
 }

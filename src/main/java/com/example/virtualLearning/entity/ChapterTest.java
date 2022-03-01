@@ -14,14 +14,19 @@ public class ChapterTest {
     private String name;
     @NotNull
     private long chapterId;
+    @NotNull
+    private long courseId;
+    @NotNull
+    private boolean finalTest;
 
-    public ChapterTest(long id, String name, long chapterId) {
+    public ChapterTest(long id, String name, long chapterId, long courseId) {
         this.id = id;
         this.name = name;
         this.chapterId = chapterId;
+        this.courseId = courseId;
     }
 
     public ChapterTestTable toChapterTestTable() {
-        return new ChapterTestTable(this.name, this.chapterId);
+        return new ChapterTestTable(this.name, this.chapterId,this.courseId,this.finalTest);
     }
 }
